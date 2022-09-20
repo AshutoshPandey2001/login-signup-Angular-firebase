@@ -14,9 +14,10 @@
                    <!-- <p>PhotoURL :{{item.photoURL}}</p> -->
                    <p><b>Address:</b> {{item.addrass}}</p>
                    <p><b>UID:</b>{{item.uid}}</p>
-                   <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal" (click)="editDetails(item.uid , item)">
+                   <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal" (click)="editDetails(item.uid , item)">
                     Edit
                   </button>
+                  <button type="button" class="btn btn-danger float-right" (click)="deleteUser(item.uid)"> Delete</button>
           </div> 
         </div>
         <div class="modal" id="myModal">

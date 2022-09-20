@@ -11,3 +11,10 @@ h1{
 .cardRow{
     justify-content: space-around;
 }
+.card {
+    transition: box-shadow .3s;
+    // box-shadow: 0;
+}
+.card:hover{
+    box-shadow: 10px 10px 20px rgba(23, 4, 4, 0.905); 
+}

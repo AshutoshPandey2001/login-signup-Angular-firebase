@@ -92,8 +92,9 @@ export class HomeComponent implements OnInit {
     console.log(this.EditUserForm.value);
 
     this.authService.updateUserData(this.selectedUid, this.EditUserForm.value);
-    this.clearFormData();
     this.getUsers();
+
+    this.clearFormData();
 
     // this.userData[this.selectedUid].displayName =
     //   this.EditUserForm.value.displayName;
@@ -101,6 +102,13 @@ export class HomeComponent implements OnInit {
     //   this.EditUserForm.value.mobileNo;
     // this.userData[this.selectedUid].email = this.EditUserForm.value.email;
     // console.log('Updated Data', this.userData);
+  }
+
+  deleteUser(uid: any) {
+    this.selectedUid = uid;
+    console.log(this.selectedUid);
+    this.afs.collection('UsersDetails').doc(this.selectedUid).delete();
+    this.getUsers();
   }
 
   closeForm() {
