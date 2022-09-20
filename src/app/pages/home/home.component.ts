@@ -10,6 +10,7 @@ import { AddUser, GetUsers } from '../store/action/userDetails.action';
 import { UserProfile } from 'src/app/pages/models/user-data';
 import { LoginState } from '../store/state/userDetails.stste';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -105,10 +106,27 @@ export class HomeComponent implements OnInit {
   }
 
   deleteUser(uid: any) {
-    this.selectedUid = uid;
-    console.log(this.selectedUid);
-    this.afs.collection('UsersDetails').doc(this.selectedUid).delete();
-    this.getUsers();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancle',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.selectedUid = uid;
+        console.log(this.selectedUid);
+        this.afs.collection('UsersDetails').doc(this.selectedUid).delete();
+        this.getUsers();
+
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+      }
+    });
   }
 
   closeForm() {
