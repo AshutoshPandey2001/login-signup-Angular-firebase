@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { user } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Router } from '@angular/router';
 // import { async, Observable } from 'rxjs';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../shared/service/auth-Service/auth.service';
 import { Select, Store } from '@ngxs/store';
-import { AddUser, GetUsers } from '../store/action/userDetails.action';
-import { UserProfile } from 'src/app/pages/models/user-data';
-import { LoginState } from '../store/state/userDetails.stste';
+import {
+  AddUser,
+  DeleteUsers,
+  GetUsers,
+  UpdateUsers,
+} from '../store/action/userDetails.action';
+import { LoginState } from '../store/state/userDetails.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +35,8 @@ export class HomeComponent implements OnInit {
     private afauth: AngularFireAuth,
     private afs: AngularFirestore,
     private store: Store,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private ngxService: NgxUiLoaderService
   ) {
     this.EditUserForm = this.fb.group({
       displayName: ['', [Validators.required, Validators.minLength(6)]],
@@ -43,21 +47,22 @@ export class HomeComponent implements OnInit {
           Validators.required,
           Validators.minLength(10),
           Validators.maxLength(10),
-          Validators.pattern('^[0-9]*$'),
+          Validators.pattern('^[0-9]{10}$'),
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
+      uid: [''],
     });
   }
 
   ngOnInit(): void {
-    console.log(
-      'Current usere',
-      this.user$.subscribe((res) => {
-        console.log(res?.uid);
-        this.UserUID$ = res?.uid;
-      })
-    );
+    // console.log(
+    //   'Current usere',
+    //   this.user$.subscribe((res) => {
+    //     console.log(res?.uid);
+    //     this.UserUID$ = res?.uid;
+    //   })
+    // );
     this.getUsers();
     // console.log(this.user$);
     this.userData$.subscribe((res: any) => {
@@ -69,14 +74,13 @@ export class HomeComponent implements OnInit {
   }
 
   getUsers() {
-    this.store.dispatch(new GetUsers());
-    // this.authService.getUserDetails().subscribe((result) => {
-    //   console.log(result);
-    //   let user = {
-    //     email: 'adbajdfsgjf',
-    //   };
-    //   this.store.dispatch(new AddUser(user));
-    // });
+    // this.store.dispatch(new GetUsers());
+    this.authService.getUserDetails().then((res) => {
+      console.log('response from Database', res);
+      this.store.dispatch(new AddUser(res));
+    });
+
+    // console.log('getted users', gettEdUsera);
   }
   editDetails(uid: any, obj: any) {
     this.selectedUid = uid;
@@ -86,16 +90,26 @@ export class HomeComponent implements OnInit {
       phoneNumber: obj.phoneNumber,
       email: obj.email,
       addrass: obj.addrass,
+      uid: obj.uid,
     });
   }
 
-  updateData() {
-    console.log(this.EditUserForm.value);
+  async updateData() {
+    try {
+      let updateRes: any = await this.authService.updateUserData(
+        this.selectedUid,
+        this.EditUserForm.value
+      );
+      if (updateRes) {
+        await this.store.dispatch(
+          new UpdateUsers(this.EditUserForm.value, this.selectedUid)
+        );
+        this.clearFormData();
+      }
+    } catch (error) {}
+    // this.authService.updateUserData(this.selectedUid, this.EditUserForm.value);
 
-    this.authService.updateUserData(this.selectedUid, this.EditUserForm.value);
-    this.getUsers();
-
-    this.clearFormData();
+    // console.log(this.EditUserForm.value);
 
     // this.userData[this.selectedUid].displayName =
     //   this.EditUserForm.value.displayName;
@@ -105,7 +119,8 @@ export class HomeComponent implements OnInit {
     // console.log('Updated Data', this.userData);
   }
 
-  deleteUser(uid: any) {
+  async deleteUser(uid: any) {
+    this.selectedUid = uid;
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -116,15 +131,21 @@ export class HomeComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!',
       showCancelButton: true,
       cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancle',
+      cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.selectedUid = uid;
-        console.log(this.selectedUid);
-        this.afs.collection('UsersDetails').doc(this.selectedUid).delete();
-        this.getUsers();
+        this.ngxService.start();
 
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        setTimeout(async () => {
+          await this.afs
+            .collection('UsersDetails')
+            .doc(this.selectedUid)
+            .delete();
+          this.store.dispatch(new DeleteUsers(this.selectedUid));
+
+          this.ngxService.stop();
+          Swal.fire('Deleted!', 'User Details been deleted.', 'success');
+        }, 5000);
       }
     });
   }

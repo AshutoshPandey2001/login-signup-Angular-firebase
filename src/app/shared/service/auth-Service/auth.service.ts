@@ -17,10 +17,8 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
-import { UserProfile } from '../models/user-data';
+
 import { from, Observable } from 'rxjs';
-// import { resolve } from 'dns';
-// import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +26,6 @@ import { from, Observable } from 'rxjs';
 export class AuthService {
   currentUser$ = authState(this.auth);
   currrentUserId$: any;
-  userData$: any[] = [];
 
   // usersCollection!: AngularFirestoreCollection<UserProfile>;
   // users: Observable<UserProfile[]>;
@@ -115,6 +112,7 @@ export class AuthService {
     }
   }
 
+  // Add Users Details in Firestore Database
   async addUserDetails(userDetails: any) {
     try {
       let data = {
@@ -123,7 +121,6 @@ export class AuthService {
         photoURL: userDetails.photoURL,
         phoneNumber: userDetails.phoneNumber,
         uid: userDetails.uid,
-        // address: userDetails.address,
       };
       console.log('Some Data', userDetails);
       let user = await this.firestore
@@ -139,6 +136,8 @@ export class AuthService {
       // console.log('result', res);
     } catch (error) {}
   }
+
+  //Update UserDetails In Firestore
 
   async updateUserData(selectedUid: any, UpdateUserProfile: any) {
     try {
@@ -157,35 +156,17 @@ export class AuthService {
         displayName: data.displayName,
         addrass: data.addrass,
       });
-      console.log('update res', res);
-    } catch (error) {}
+      return res;
+    } catch (error) {
+      console.error('in update error', error);
+    }
   }
 
+  // Get User Details in firestore
+
   getUserDetails() {
-    this.userData$ = [];
-
-    // return new Promise((resolve) => {
-    //   this.firestore
-    //     .collection('UsersDetails')
-    //     .valueChanges()
-    //     .subscribe((res: any) => {
-    //       // var u_i_d = localStorage.getItem('uid');
-    //       for (let i = 0; i < res.length; i++) {
-    //         if (res[i].uid != this.currrentUserId$) {
-    //           // resolve(this.userData$.push(res[i]));
-
-    //           this.userData$.push(res[i]);
-    //           // console.log('Resolve User Data', this.userData$);
-    //           resolve(this.userData$);
-
-    //           console.log('Resolve Data', this.userData$);
-    //         }
-    //       }
-    //     });
-    // });
-
     return new Promise((resolve) => {
-      let userData$: any[] = [];
+      var userData$: any[] = [];
 
       let dataRef = this.firestore.collection('UsersDetails');
       dataRef.get().subscribe((res) => {
@@ -193,44 +174,22 @@ export class AuthService {
           console.log('get res ', doc);
           let res: any = doc.data();
           if (res.uid !== this.currrentUserId$) {
-            this.userData$.push(res);
+            userData$.push(res);
           }
 
-          // resolve(doc.data());
-          console.log('User$Data', this.userData$);
+          console.log('User$Data', userData$);
         });
-        // for (let i = 0; i < this.userData$.length; i++) {
-        //   if (this.userData$[i].uid != this.currrentUserId$) {
-        //     this.userData$1.push(this.userData$);
-        //   }
-        // }
-        console.log('new User$ Data', this.userData$);
-        resolve(this.userData$);
+
+        console.log('new User$ Data', userData$);
+        resolve(userData$);
         // console.log('get res', res.docs);
       });
     });
-
-    // this.firestore
-    //   .collection('UsersDetails')
-    //   .where('capital', '==', true)
-    //   .get()
-    //   .then((querySnapshot: any[]) => {
-    //     querySnapshot.forEach((doc) => {
-    //       // doc.data() is never undefined for query doc snapshots
-    //       console.log(doc.id, ' => ', doc.data());
-    //     });
-    //   })
-    //   .catch((error: any) => {
-    //     console.log('Error getting documents: ', error);
-    //   });
-
-    // return new Promise((resolve) => {
-    //   this.firestore
-    //     .collection('UsersDetails')
-    //     .get()
-    //     .subscribe((res) => {
-    //       console.log('Get Res', res);
-    //     });
-    // });
   }
 }
+
+// for (let i = 0; i < this.userData$.length; i++) {
+//   if (this.userData$[i].uid != this.currrentUserId$) {
+//     this.userData$1.push(this.userData$);
+//   }
+// }

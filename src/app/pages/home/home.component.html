@@ -3,15 +3,43 @@
 
   <h1 >Welcome  to the Skyban Technology Pvt ltd</h1>
       <!-- <h1 *ngIf="user |async"> Welcome {{user.email}}</h1> -->
+      <div class="row">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Mobile No.</th>
+              <th>Adress</th>
+              <th>UID</th>
+              <th>Action</th>              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of userData ">
+              <td>{{item.displayName}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.phoneNumber}}</td>
+              <td>{{item.addrass}}</td>
+              <td>{{item.uid}}</td>
+              <td>
+                <button type="button" class="btn  " data-toggle="modal" data-target="#myModal" (click)="editDetails(item.uid , item)">
+                  <i class="material-icons" style="font-size:25px ; color: rgba(255, 200, 0, 0.949);">edit</i>
+                </button>
+                <button type="button" class="btn "  (click)="deleteUser(item.uid)"> <i class="material-icons" style="font-size:25px ; color: red;">delete</i></button>
+              </td>
+            </tr>      
+          </tbody>
+        </table>
+      </div>
 
       <div class="row cardRow">
-        <div class="card" *ngFor="let item of userData ;  ">
+        <!-- <div class="card" *ngFor="let item of userData ;  ">
           <div class="card-body">
                    <h5><b>Name:</b> {{item.displayName}}</h5>
                    <p><b>Email:</b> {{item.email}}</p>
                    <p><b>Mobile no.:</b> {{item.phoneNumber}}</p>
-                   <!-- <img [src]='item.photoURL' alt="" class="imgcss"> -->
-                   <!-- <p>PhotoURL :{{item.photoURL}}</p> -->
+                   
                    <p><b>Address:</b> {{item.addrass}}</p>
                    <p><b>UID:</b>{{item.uid}}</p>
                    <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal" (click)="editDetails(item.uid , item)">
@@ -19,7 +47,7 @@
                   </button>
                   <button type="button" class="btn btn-danger float-right" (click)="deleteUser(item.uid)"> Delete</button>
           </div> 
-        </div>
+        </div> -->
         <div class="modal" id="myModal">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -61,7 +89,7 @@
                   </div>
                   <div class="form-group">
                     <label class="txtcolor">Mobile No.:</label>
-                    <input type="text" class="form-control" placeholder="Enter Your Mobile No." formControlName="phoneNumber" [ngClass]="{'is-invalid': f['phoneNumber'].touched && f['phoneNumber'].errors}">
+                    <input type="tel"  maxlength="10" class="form-control" placeholder="Enter Your Mobile No." formControlName="phoneNumber" [ngClass]="{'is-invalid': f['phoneNumber'].touched && f['phoneNumber'].errors}">
                     <div *ngIf=" f['phoneNumber'].touched && f['phoneNumber'].errors" class="invalid-feedback">
                       <div *ngIf="f['phoneNumber'].touched && f['phoneNumber'].errors['required']">
                         Mobile No. is Required ...!
@@ -88,12 +116,18 @@
               
                       </div>
                     </div>
-                    <button class=" btn btn-warning" (click)="updateData()" data-dismiss="modal" >Update</button>
+                    <div class="form-group">
+                      <label class="txtcolor">UID:</label>
+                      <input type="text" class="form-control" placeholder=" " formControlName="uid"  readonly >
+                      
+                    </div>
+                    
                 </form>
               </div>
               
               <!-- Modal footer -->
               <div class="modal-footer">
+                <button class=" btn btn-warning" (click)="updateData()" data-dismiss="modal" >Update</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeForm()">Close</button>
               </div>
               

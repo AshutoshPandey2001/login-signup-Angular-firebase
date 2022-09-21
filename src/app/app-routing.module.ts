@@ -1,28 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContactusComponent } from './pages/contactus/contactus.component';
-import { ActivateGuardGuard } from './pages/guards/activate-guard.guard';
+import { ActivateGuardGuard } from './shared/guards/activate-guard.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SingupComponent } from './pages/singup/singup.component';
 
-
-
-const routes: Routes = [ 
-  {path: 'Login' ,component:LoginComponent  },
-  {path: 'Signup' ,component:SingupComponent },
-  {path: 'Home' ,component:HomeComponent ,canActivate :[ActivateGuardGuard]  },
-  {path:'contactus' , component:ContactusComponent},
-  {path:'' , redirectTo:'/Home' , pathMatch:'full'}
-
-
+const routes: Routes = [
+  { path: 'Login', component: LoginComponent },
+  { path: 'Signup', component: SingupComponent },
+  { path: 'Home', component: HomeComponent, canActivate: [ActivateGuardGuard] },
+  { path: 'contactus', component: ContactusComponent },
+  { path: '', redirectTo: '/Home', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 function redirectUnauthorizedTo(arg0: string[]) {
   throw new Error('Function not implemented.');
 }
@@ -30,4 +26,3 @@ function redirectUnauthorizedTo(arg0: string[]) {
 function redirectLoogeInTo(arg0: string) {
   throw new Error('Function not implemented.');
 }
-

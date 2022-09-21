@@ -1,5 +1,3 @@
-import { UserProfile } from 'src/app/pages/models/user-data';
-
 export class GetUsers {
   static readonly type = '[UserDetails].Get';
 }
@@ -7,6 +5,14 @@ export class GetUsers {
 export class AddUser {
   static readonly type = 'Add user';
   constructor(public payload: any) {
-    console.log('user', payload);
+    // console.log('user', payload);
   }
+}
+export class UpdateUsers {
+  static readonly type = '[UserDetails].Update';
+  constructor(public payload: any, public uid: any) {}
+}
+export class DeleteUsers {
+  static readonly type = '[UserDetails].delete';
+  constructor(public uid: any) {}
 }

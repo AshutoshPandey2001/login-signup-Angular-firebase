@@ -9,7 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { SingupComponent } from './pages/singup/singup.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { ContactusComponent } from './pages/contactus/contactus.component';
-import { ActivateGuardGuard } from './pages/guards/activate-guard.guard';
+import { ActivateGuardGuard } from './shared/guards/activate-guard.guard';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
@@ -17,10 +17,17 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { NgxsModule } from '@ngxs/store';
-import { AuthService } from './pages/service/auth.service';
+import { AuthService } from './shared/service/auth-Service/auth.service';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { LoginState } from './pages/store/state/userDetails.stste';
+import { LoginState } from './pages/store/state/userDetails.state';
+import {
+  NgxUiLoaderModule,
+  NgxUiLoaderConfig,
+  SPINNER,
+  POSITION,
+  PB_DIRECTION,
+} from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -45,6 +52,15 @@ import { LoginState } from './pages/store/state/userDetails.stste';
     NgxsModule.forRoot([LoginState]),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxUiLoaderModule.forRoot({
+      bgsColor: 'red',
+      bgsPosition: POSITION.bottomCenter,
+      bgsSize: 40,
+      bgsType: SPINNER.rectangleBounce, // background spinner type
+      fgsType: SPINNER.chasingDots, // foreground spinner type
+      pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
+      pbThickness: 5, // progress bar thickness
+    }),
   ],
   providers: [ActivateGuardGuard, AuthService],
   bootstrap: [AppComponent],

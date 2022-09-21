@@ -36,7 +36,7 @@
       </div>
       <div class="form-group">
         <label class="txtcolor">Mobile No.:</label>
-        <input type="text" class="form-control" placeholder="Enter Your Mobile No." formControlName="mobileNo" [ngClass]="{'is-invalid': f['mobileNo'].touched && f['mobileNo'].errors}">
+        <input type="tel"  maxlength="10" class="form-control" placeholder="Enter Your Mobile No." formControlName="mobileNo" [ngClass]="{'is-invalid': f['mobileNo'].touched && f['mobileNo'].errors}">
         <div *ngIf=" f['mobileNo'].touched && f['mobileNo'].errors" class="invalid-feedback">
           <div *ngIf="f['mobileNo'].touched && f['mobileNo'].errors['required']">
             Mobile No. is Required ...!
