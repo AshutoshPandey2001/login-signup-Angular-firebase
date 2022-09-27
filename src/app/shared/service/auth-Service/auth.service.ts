@@ -19,6 +19,7 @@ import {
 } from '@angular/fire/compat/firestore';
 
 import { from, Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -50,8 +51,11 @@ export class AuthService {
   async login(email: string, password: string) {
     try {
       return await this.fireauth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      Swal.fire('Error!', error.message, 'error');
+
+      // console.error(error);
+      // alert(error.message);
       return;
     }
   }
@@ -64,7 +68,9 @@ export class AuthService {
         email,
         password
       );
-    } catch (error) {
+    } catch (error: any) {
+      Swal.fire('Error!', error.message, 'error');
+
       console.log(error);
       return;
     }
@@ -76,6 +82,8 @@ export class AuthService {
         localStorage.clear();
       },
       (err) => {
+        Swal.fire('Error!', err.message, 'error');
+
         alert(err.message);
       }
     );
@@ -86,7 +94,9 @@ export class AuthService {
   async googleLogin() {
     try {
       return await this.fireauth.signInWithPopup(new GoogleAuthProvider());
-    } catch (error) {
+    } catch (error: any) {
+      Swal.fire('Error!', error.message, 'error');
+
       console.log(error);
       return;
     }
@@ -96,7 +106,9 @@ export class AuthService {
   async faceBookLogin() {
     try {
       return await this.fireauth.signInWithPopup(new FacebookAuthProvider());
-    } catch (error) {
+    } catch (error: any) {
+      Swal.fire('Error!', error.message, 'error');
+
       console.log(error);
       return;
     }
@@ -106,7 +118,9 @@ export class AuthService {
   async twitterLogin() {
     try {
       return await this.fireauth.signInWithPopup(new TwitterAuthProvider());
-    } catch (error) {
+    } catch (error: any) {
+      Swal.fire('Error!', error.message, 'error');
+
       console.log(error);
       return;
     }
@@ -134,12 +148,14 @@ export class AuthService {
         phoneNumber: data.phoneNumber ? data.phoneNumber : '',
       });
       // console.log('result', res);
-    } catch (error) {}
+    } catch (error: any) {
+      Swal.fire('Error!', error.message, 'error');
+    }
   }
 
   //Update UserDetails In Firestore
 
-  async updateUserData(selectedUid: any, UpdateUserProfile: any) {
+  async updateUserData(UpdateUserProfile: any) {
     try {
       let data = {
         email: UpdateUserProfile.email,
@@ -149,15 +165,17 @@ export class AuthService {
       };
       let user = await this.firestore
         .collection('UsersDetails')
-        .doc(selectedUid);
-      let res = await user.update({
+        .doc(UpdateUserProfile.uid);
+      let res: any = await user.update({
         email: data.email,
         phoneNumber: data.phoneNumber,
         displayName: data.displayName,
         addrass: data.addrass,
       });
       return res;
-    } catch (error) {
+    } catch (error: any) {
+      Swal.fire('Error!', error.message, 'error');
+
       console.error('in update error', error);
     }
   }

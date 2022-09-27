@@ -1,16 +1,27 @@
-<nav>
-    <a href=""><img src="../assets/1653654867192.jfif" alt="" class="nav-img"></a>
-    <div class="nav-liinks">
-      <!-- <i class="fa fa-times"  (click)="hideMenu()" ></i> -->
 
-      <ul >
-        <li *ngFor="let item of navBar"><a [routerLink]="item.path" >{{item.title}}</a></li>
-        
-        <li><button class="btn btn-danger" (click)="Logout()">Logout</button></li>
-    
-      </ul>
-    </div>
-    <!-- <i class="fa fa-bars" (click)="ShowMenu()" ></i> -->
+<!--Navbar -->
+<nav class=" navbar navbar-expand-sm navbar-dark info-color">
+  <a href=""><img src="../../../assets/Skyban logo with transparent background.png" alt="" class="nav-img"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="material-icons " style="font-size:36px ; color: white;">menu</i>
 
-    
-  </nav>
+  </button>
+  <div class="nav-liinks collapse navbar-collapse" id="navbarSupportedContent-4" >
+      
+    <ul  class="navbar-nav ml-auto">
+      <li  *ngFor="let item of navBar"><a [routerLink]="item.path" >{{item.title}}</a></li>
+      
+      <li ><i class="fa fa-sign-out"   (click)="Logout()" style="font-size: 36px; color: rgba(57, 42, 170, 0.697); "></i>
+      </li>
+  
+    </ul>
+  </div>
+ 
+</nav>
+<!--/.Navbar -->
+
+
+
+
+

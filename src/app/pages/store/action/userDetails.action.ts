@@ -10,7 +10,7 @@ export class AddUser {
 }
 export class UpdateUsers {
   static readonly type = '[UserDetails].Update';
-  constructor(public payload: any, public uid: any) {}
+  constructor(public payload: any) {}
 }
 export class DeleteUsers {
   static readonly type = '[UserDetails].delete';

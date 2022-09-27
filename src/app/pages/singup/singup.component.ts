@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/service/auth-Service/auth.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import swal from 'sweetalert2';
 
 import { user } from '@angular/fire/auth';
 
@@ -17,7 +19,8 @@ export class SingupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private ngxservice: NgxUiLoaderService
   ) {
     this.singUpForm = this.formBuilder.group({
       fullName: ['', [Validators.required, Validators.minLength(6)]],
@@ -28,7 +31,7 @@ export class SingupComponent implements OnInit {
           Validators.required,
           Validators.minLength(10),
           Validators.maxLength(10),
-          Validators.pattern('^[0-9]*$'),
+          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
@@ -56,13 +59,15 @@ export class SingupComponent implements OnInit {
 
         console.log('User Values', userValue);
         if (userValue) {
+          this.ngxservice.start();
           await this.route.navigate(['/Login']);
+          this.ngxservice.stop();
         }
       } catch (error) {
         console.log(error);
       }
     } else {
-      alert('Please Enter All Valid Details');
+      swal.fire('Error!', 'Please Enter Correct Details', 'error');
     }
   }
   login() {

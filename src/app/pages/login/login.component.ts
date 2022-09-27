@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/service/auth-Service/auth.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,12 @@ import { AuthService } from '../../shared/service/auth-Service/auth.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   userDataList: any = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private ngxService: NgxUiLoaderService
   ) {
     this.loginForm = this.formBuilder.group({
       email: [
@@ -38,33 +42,38 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clearData();
+    // this.clearData();
     // this.auth.getUserDetails().subscribe();
   }
 
   async logIn() {
+    // this.toast.success('Login Successfully!');
+
     if (this.loginForm.valid) {
       try {
         let user: any = await this.auth.login(
           this.loginForm.value.email,
           this.loginForm.value.password
         );
-        await this.auth.addUserDetails(user.user);
 
         if (user) {
+          this.ngxService.start();
+          await this.auth.addUserDetails(user.user);
+
           console.log('user_data', user.user.uid);
           // localStorage.setItem('uid', user.user.uid);
           await localStorage.setItem('token', 'true');
-          this.router.navigate(['/Home']);
+          this.ngxService.stop();
 
+          this.router.navigate(['/Home']);
           this.clearData();
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
         return;
       }
     } else {
-      alert('Please Enter Correct Details');
+      swal.fire('Error!', 'Please Enter Correct Details', 'error');
     }
   }
 

@@ -1,88 +1,9 @@
-.row{
-    background: #6a11cb;
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    height: 100%;
-   
-
-}
-.card{
-    background: black;
-
-    margin-top: 35px;
-    margin-bottom: 35px;
-    border-radius: 15px;
-    text-decoration: none;
-    box-shadow: 5px 10px 5px 10px;
-}
-input{
-    border-radius: 20px;
-}
-
-.card-body h2{
-    color: white;
-    text-align: center;
-}
-.card-body p{
-    color: rgba(255, 255, 255, 0.853);
-    text-align: center;
-    
-}
-.txtcolor{
-    color: white;
-}
-input{
-    background: black;
-    outline: rgba(255, 255, 255, 0.853);
-}
-.lbtn{
+.center {
     position: absolute;
-    text-align: center;
-    margin-left: 180px;
-}
-
-.ficon{
-    text-align: center;
-}
-.rtb{
-    text-align: center;
-}
-.rtb p {
-    color: white;
-}
-.rtb p span{
-    color: rgba(255, 255, 255, 0.508);
-}
-
-@media only screen and (min-width: 481px) and ( max-width: 768px) {
-    .lbtn{
-        // align-items: center;
-        // margin-left: 180px;
-
+    top: 50%;
+    transform: translate(0, -50%);
+    justify-items: center;
     }
-    .card{
-        width: 500px;
-        margin-left: -66px;
-    }
-    
-  }
-  @media only screen and  (min-device-width: 320px)and (max-device-width: 480px) {
-    .lbtn{
-        margin-left: 120px;
-        // margin-left: 100px;
-
-    }
-    .card{
-        align-items: center;
-        width: auto;
-        // margin-left: 36px;
-    }
-  }
-
-  @media only screen and  (max-width: 320px) {
-    .lbtn{
-        margin-left: 100px;
-        // margin-left: 100px;
-
-    }
-}
+label{
+    font-weight: bold;
+ }

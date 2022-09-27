@@ -1,76 +1,24 @@
-.row{
-    background: #6a11cb;
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    height: 730px;
-   
-
-}
-.card{
-    background: black;
-
-    margin-top: 100px;
-    margin-bottom: 75px;
-    border-radius: 15px;
-    text-decoration: none;
-    box-shadow: 5px 10px 5px 10px;
-}
-
-input{
-    border-radius: 20px;
-}
-
-.card-body h2{
-    color: white;
-    text-align: center;
-}
-.card-body p{
-    color: rgba(255, 255, 255, 0.853);
-    text-align: center;
-    
-}
-.txtcolor{
-    color: white;
-}
-input{
-    background: black;
-    outline: rgba(255, 255, 255, 0.853);
-}
-.lbtn{
+.center {
     position: absolute;
-    text-align: center;
-    margin-left: 180px;
-}
-.fpasswod{
-    text-align: center;
-    color: rgba(255, 255, 255, 0.853);
+    top: 50%;
+    transform: translate(0, -50%);
+    justify-items: center;
+    }
+    .lbtn{
+        text-align: center;
+   }
+   .btn{
+    width: 130px;
+    margin-bottom: 5px;
+   }
 
-}
-.fpasswod a{
-    color: white;
-    text-decoration: none;
-}
+
 .ficon{
-    text-align: center;
-}
-.rtb{
-    text-align: center;
-}
-.rtb p {
-    color: white;
-}
-.rtb p span{
-    color: rgba(255, 255, 255, 0.508);
-}
-@media only screen and (max-width: 768px) {
-    .lbtn{
-        margin-left: 130px;
+     text-align: center;
+     font-size: 20px;
+     color: black;
+ }
+ label{
+    font-weight: bold;
+ }
 
-    }
-  }
-  @media only screen and (max-width: 400px) {
-    .lbtn{
-        margin-left: 100px;
-
-    }
-  }

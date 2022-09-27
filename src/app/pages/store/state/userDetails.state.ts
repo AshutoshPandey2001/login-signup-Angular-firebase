@@ -65,19 +65,33 @@ export class LoginState {
   @Action(UpdateUsers)
   async updateUser(
     { getState, setState }: StateContext<loginStateModel>,
-    { payload, uid }: UpdateUsers
+    { payload }: UpdateUsers
   ) {
     // this.authService.updateUserData(uid, payload);
     const state = getState();
     const usreList = state.usersProfile;
-    const index = usreList.findIndex((usr: any) => usr.uid == uid);
+    // usreList.map((usr: any) => {
+    //   console.log('after', usr);
+
+    //   if (usr.uid == payload.uid) {
+    //     usr = payload;
+    //     console.log('before', usr);
+    //     console.log('usreList', usreList);
+    //   }
+    // });
+    const index = usreList.findIndex((usr: any) => usr.uid == payload.uid);
     console.log('Update State userlist', usreList[index]);
     console.log('update State', index);
     usreList[index] = payload;
+    console.log('state user list', usreList);
+    setState({
+      ...state,
+      usersProfile: usreList,
+    });
   }
   @Action(DeleteUsers)
   deleteUser(
-    { getState, patchState, setState }: StateContext<loginStateModel>,
+    { getState, setState }: StateContext<loginStateModel>,
     { uid }: DeleteUsers
   ) {
     const state = getState();

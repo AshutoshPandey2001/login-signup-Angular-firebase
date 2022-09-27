@@ -14,6 +14,7 @@ import { LoginState } from '../store/state/userDetails.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,8 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  searchitem: any;
+  p: any;
   user$ = this.authService.currentUser$;
   EditUserForm: FormGroup;
   UserUID$: any;
@@ -95,18 +98,20 @@ export class HomeComponent implements OnInit {
   }
 
   async updateData() {
-    try {
-      let updateRes: any = await this.authService.updateUserData(
-        this.selectedUid,
-        this.EditUserForm.value
-      );
-      if (updateRes) {
-        await this.store.dispatch(
-          new UpdateUsers(this.EditUserForm.value, this.selectedUid)
+    if (this.EditUserForm.valid) {
+      try {
+        let updateRes: any = await this.authService.updateUserData(
+          this.EditUserForm.value
         );
+        this.ngxService.start();
+        await this.store.dispatch(new UpdateUsers(this.EditUserForm.value));
+        this.ngxService.stop();
         this.clearFormData();
-      }
-    } catch (error) {}
+      } catch (error) {}
+    } else {
+      swal.fire('Error!', 'Please Enter Correct Details', 'error');
+    }
+
     // this.authService.updateUserData(this.selectedUid, this.EditUserForm.value);
 
     // console.log(this.EditUserForm.value);

@@ -1,7 +1,7 @@
 nav{
 
     display: flex;    
-    background-color: rgba(0, 94, 255, 0.655);
+    background-color: rgba(22, 29, 25, 0.189);
     margin-bottom: 10px;
     flex-wrap: wrap;
     text-align: center;
@@ -11,17 +11,15 @@ nav{
 nav a img{
     align-items: center;
     // margin-top: 7px;
-    width: 220px;
+    width: 320px;
     height: auto;
-    margin-left: 15px;
-    border-radius: 25px;
     text-decoration: none;
     
 }
 .nav-liinks{
     align-items: center;
     
-    flex: 1;
+    // flex: 1;
     text-align: right;
     margin-right: 20px;
 }
@@ -65,3 +63,13 @@ nav a img{
 .nav-liinks ul li button{
     border-radius: 25px;
 }
+
+
+@media(max-width:700px){
+    .nav-liinks ul li{
+     display: block;
+    }
+    
+    
+}
+

@@ -1,98 +1,106 @@
 
 
-<div class="row">
-    <div class="col-lg-4 col-md-3"></div>
-    <div class="col-lg-4 col-md-3 col-12">
-        <div class="card ">
-<div class="card-body">
-    <h2><b>Create Your Account</b> </h2>
-    <p>Please Enter All Required Details For Registration</p>
-    <form  [formGroup]="singUpForm">
-      <div class="form-group">
-        <label class="txtcolor">Full Name:</label>
-        <input type="text" class="form-control" placeholder="Enter Your Name" formControlName="fullName" [ngClass]="{'is-invalid': f['fullName'].touched && f['fullName'].errors}">
-        <div *ngIf="f['fullName'].touched && f['fullName'].errors" class="invalid-feedback">
-          <div *ngIf="f['fullName'].touched && f['fullName'].errors['required']">
-            Full Name Is Required....!
-          </div>
-          <div *ngIf="f['fullName'].touched && f['fullName'].errors['minlength']">
-            Full Name Must Be Minimum 6 Char....!
-          </div>
+<section>
+  <div class="center">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-lg-12 col-xl-11 align-items-center justify-content-center">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body ">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                <form  [formGroup]="singUpForm">
+                  <div class="form-group">
+                    <label class="txtcolor">Full Name:</label>
+                    <input type="text" class="form-control" placeholder="Enter Your Name" formControlName="fullName" [ngClass]="{'is-invalid': f['fullName'].touched && f['fullName'].errors}">
+                    <div *ngIf="f['fullName'].touched && f['fullName'].errors" class="invalid-feedback">
+                      <div *ngIf="f['fullName'].touched && f['fullName'].errors['required']">
+                        Full Name Is Required....!
+                      </div>
+                      <div *ngIf="f['fullName'].touched && f['fullName'].errors['minlength']">
+                        Full Name Must Be Minimum 6 Char....!
+                      </div>
+                        
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="txtcolor">Address.:</label>
+                    <input type="text" class="form-control" placeholder="Enter Your Address" formControlName="addrass" [ngClass]="{'is-invalid': f['addrass'].touched && f['addrass'].errors}" >
+                    <div *ngIf=" f['addrass'].touched && f['addrass'].errors" class="invalid-feedback">
+                      <div *ngIf="f['addrass'].touched && f['addrass'].errors['required']">
+                        Address is Required ...!
+                      </div>
+                      <div *ngIf="f['addrass'].touched && f['addrass'].errors['minlength']">
+                        Minimum Address Length 10 is Required ...!
+                      </div>
             
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="txtcolor">Mobile No.:</label>
+                    <input type="text" maxlength="10" class="form-control" placeholder="Enter Your Mobile No." formControlName="mobileNo" [ngClass]="{'is-invalid': f['mobileNo'].touched && f['mobileNo'].errors}">
+                    <div *ngIf=" f['mobileNo'].touched && f['mobileNo'].errors" class="invalid-feedback">
+                      <div *ngIf="f['mobileNo'].touched && f['mobileNo'].errors['required']">
+                        Mobile No. is Required ...!
+                      </div>
+                      <div *ngIf="f['mobileNo'].touched && f['mobileNo'].errors['minlength']">
+                        Minimum 10 Digit Mobile No. is Required........!
+                      </div>
+                      <div *ngIf="f['mobileNo'].touched && f['mobileNo'].errors['maxlength']">
+                        Mobile No. Must be Only 10 Digit ......!
+                      </div>
+            
+                    </div>
+                  </div>
+                    <div class="form-group">
+                      <label class="txtcolor">Email address:</label>
+                      <input type="email" class="form-control" placeholder="Enter email" formControlName="email" [ngClass]="{'is-invalid': f['email'].touched && f['email'].errors}" >
+                      <div *ngIf=" f['email'].touched && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].touched && f['email'].errors['required']">
+                          Email id is Required ...!
+                        </div>
+                        <div *ngIf="f['email'].touched && f['email'].errors['email']">
+                          Please Write Email in this pattern ex: abc@gmail.com  ...!
+                        </div>
+              
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="txtcolor">Password:</label>
+                      <input type="password" class="form-control" placeholder="Enter password" formControlName="password" [ngClass]="{'is-invalid': f['password'].touched && f['password'].errors}">
+                      <div *ngIf=" f['password'].touched && f['password'].errors" class="invalid-feedback">
+                        <div *ngIf="f['password'].touched && f['password'].errors['required']">
+                          Password is Required ...!
+                        </div>
+                        <div *ngIf="f['password'].touched && f['password'].errors['pattern']">
+                          Password Must Atleast Contain 8 Char , Atleast 1 Upper Case , Atleast 1 Lower Case ,  Atleast 1 Special char and Atleast 1 Number ..!
+                        </div>
+              
+                      </div>
+                    </div>
+                    <p>Already Have Account ? <span  (click)="login()">Login</span></p>
+        
+                    <div class="lbtn">
+
+                      <button type="submit" class="btn btn-primary" (click)="signUp()">Register</button>
+            
+                    </div>
+                    <br>
+                    <br>
+                  </form>
+                
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="../../../assets/photography-studio-flat-design-background-photographer-shooting-model-with-lights-digital-film-equipment-and-camera-in-cartoon-style-illustration-vector.jpg"
+                  class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="txtcolor">Address.:</label>
-        <input type="text" class="form-control" placeholder="Enter Your Address" formControlName="addrass" [ngClass]="{'is-invalid': f['addrass'].touched && f['addrass'].errors}" >
-        <div *ngIf=" f['addrass'].touched && f['addrass'].errors" class="invalid-feedback">
-          <div *ngIf="f['addrass'].touched && f['addrass'].errors['required']">
-            Address is Required ...!
-          </div>
-          <div *ngIf="f['addrass'].touched && f['addrass'].errors['minlength']">
-            Minimum Address Length 10 is Required ...!
-          </div>
-
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="txtcolor">Mobile No.:</label>
-        <input type="tel"  maxlength="10" class="form-control" placeholder="Enter Your Mobile No." formControlName="mobileNo" [ngClass]="{'is-invalid': f['mobileNo'].touched && f['mobileNo'].errors}">
-        <div *ngIf=" f['mobileNo'].touched && f['mobileNo'].errors" class="invalid-feedback">
-          <div *ngIf="f['mobileNo'].touched && f['mobileNo'].errors['required']">
-            Mobile No. is Required ...!
-          </div>
-          <div *ngIf="f['mobileNo'].touched && f['mobileNo'].errors['minlength']">
-            Minimum 10 Digit Mobile No. is Required........!
-          </div>
-          <div *ngIf="f['mobileNo'].touched && f['mobileNo'].errors['maxlength']">
-            Mobile No. Must be Only 10 Digit ......!
-          </div>
-
-        </div>
-      </div>
-        <div class="form-group">
-          <label class="txtcolor">Email address:</label>
-          <input type="email" class="form-control" placeholder="Enter email" formControlName="email" [ngClass]="{'is-invalid': f['email'].touched && f['email'].errors}" >
-          <div *ngIf=" f['email'].touched && f['email'].errors" class="invalid-feedback">
-            <div *ngIf="f['email'].touched && f['email'].errors['required']">
-              Email id is Required ...!
-            </div>
-            <div *ngIf="f['email'].touched && f['email'].errors['email']">
-              Please Write Email in this pattern ex: abc@gmail.com  ...!
-            </div>
-  
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="txtcolor">Password:</label>
-          <input type="password" class="form-control" placeholder="Enter password" formControlName="password" [ngClass]="{'is-invalid': f['password'].touched && f['password'].errors}">
-          <div *ngIf=" f['password'].touched && f['password'].errors" class="invalid-feedback">
-            <div *ngIf="f['password'].touched && f['password'].errors['required']">
-              Password is Required ...!
-            </div>
-            <div *ngIf="f['password'].touched && f['password'].errors['pattern']">
-              Password Must Atleast Contain 8 Char , Atleast 1 Upper Case , Atleast 1 Lower Case ,  Atleast 1 Special char and Atleast 1 Number ..!
-            </div>
-  
-          </div>
-        </div>
-                        <br>
-
-        <button type="submit" class="btn btn-outline-light lbtn text-center" (click)="signUp()">Register</button>
-        <br>
-        <br>
-      </form>
-      
-</div>
-<div class="ficon"><a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-    <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-    <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-</div>
-<div class="rtb">
-    <p>Already Have Account ? <span (click)="login()">Login</span></p>
-</div>
-        </div>
     </div>
-    <div class="col-lg-4 col-md-3"></div>
-
-</div>
+  </div>
+</section>
