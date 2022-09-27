@@ -135,6 +135,7 @@ export class AuthService {
         photoURL: userDetails.photoURL,
         phoneNumber: userDetails.phoneNumber,
         uid: userDetails.uid,
+        userType: userDetails.userType,
       };
       console.log('Some Data', userDetails);
       let user = await this.firestore
@@ -146,6 +147,7 @@ export class AuthService {
         photoURL: data.photoURL ? data.photoURL : '',
         uid: data.uid ? data.uid : '',
         phoneNumber: data.phoneNumber ? data.phoneNumber : '',
+        UserType: data.userType,
       });
       // console.log('result', res);
     } catch (error: any) {

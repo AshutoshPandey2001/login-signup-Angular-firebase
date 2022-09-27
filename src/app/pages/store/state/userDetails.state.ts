@@ -1,4 +1,4 @@
-import { createInjectableDefinitionMap } from '@angular/compiler/src/render3/partial/injectable';
+// import { createInjectableDefinitionMap } from '@angular/compiler/src/render3/partial/injectable';
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
@@ -9,8 +9,6 @@ import {
   GetUsers,
   UpdateUsers,
 } from '../action/userDetails.action';
-import { tap } from 'rxjs/operators';
-import { user } from '@angular/fire/auth';
 
 // State Model
 export class loginStateModel {
