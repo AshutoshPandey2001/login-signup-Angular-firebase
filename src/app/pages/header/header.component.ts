@@ -14,12 +14,15 @@ export class HeaderComponent implements OnInit {
     {
       title: 'Dashboard',
       path: '/Home',
+      icon: 'fal fa-home',
     },
     {
       title: 'Contact Us',
       path: '/contactus',
+      icon: 'fal fa-phone',
     },
   ];
+  collepsed = false;
   constructor(
     private route: Router,
     private auth: AuthService,
@@ -52,5 +55,12 @@ export class HeaderComponent implements OnInit {
         }, 3000);
       }
     });
+  }
+
+  toggelcollepse() {
+    this.collepsed = !this.collepsed;
+  }
+  closesisenav() {
+    this.collepsed = false;
   }
 }

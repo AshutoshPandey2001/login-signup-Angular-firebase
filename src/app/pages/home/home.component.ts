@@ -59,28 +59,30 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(
-    //   'Current usere',
-    //   this.user$.subscribe((res) => {
-    //     console.log(res?.uid);
-    //     this.UserUID$ = res?.uid;
-    //   })
-    // );
+    this.user$.subscribe((res) => {
+      console.log(res?.uid);
+      this.UserUID$ = res?.uid;
+    });
     this.getUsers();
-    // console.log(this.user$);
     this.userData$.subscribe((res: any) => {
       this.userData = res;
-
-      // this.userData = res;
     });
     console.log('original User Data', this.userData);
   }
 
-  getUsers() {
+  async getUsers() {
+    let filterData: any = [];
+
     // this.store.dispatch(new GetUsers());
-    this.authService.getUserDetails().then((res) => {
+    await this.authService.getUserDetails().then((res: any) => {
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].uid !== this.UserUID$) {
+          filterData.push(res[i]);
+        }
+      }
+      this.store.dispatch(new AddUser(filterData));
+
       console.log('response from Database', res);
-      this.store.dispatch(new AddUser(res));
     });
 
     // console.log('getted users', gettEdUsera);

@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   addUserForm: FormGroup;
   userDataList: any = [];
   modelref?: BsModalRef;
+  user$ = this.auth.currentUser$;
+  ress: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -61,8 +64,19 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.getData();
     // this.clearData();
-    // this.auth.getUserDetails().subscribe();
+  }
+
+  async getData(user: any) {
+    await this.auth.getUserDetails().then((res: any) => {
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].uid == user) {
+          this.ress = res[i];
+          // console.log(this.ress);
+        }
+      }
+    });
   }
   closeModel() {
     this.modelref?.hide();
@@ -78,22 +92,20 @@ export class LoginComponent implements OnInit {
           this.loginForm.value.email,
           this.loginForm.value.password
         );
+        await this.getData(user.user.uid);
         console.log(user);
 
-        await this.addUser(user.user);
-        this.modelref = this.modelService.show(template);
-
-        if (user) {
-          // this.ngxService.start();
-          // await this.auth.addUserDetails(user.user);
-
-          console.log('user_data', user.user.uid);
-          // localStorage.setItem('uid', user.user.uid);
-          await localStorage.setItem('token', 'true');
-          // this.ngxService.stop();
-
-          // this.router.navigate(['/Home']);
-          this.clearData();
+        if (!this.ress || !this.ress.UserType) {
+          await this.patchUser(user.user);
+          this.modelref = this.modelService.show(template);
+        } else {
+          if (user) {
+            this.ngxService.start();
+            await localStorage.setItem('token', 'true');
+            await this.ngxService.stop();
+            this.router.navigate(['/Home']);
+            this.clearData();
+          }
         }
       } catch (error) {
         console.error(error);
@@ -104,7 +116,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  async addUser(usrdata: any) {
+  async patchUser(usrdata: any) {
     this.addUserForm.patchValue({
       displayName: usrdata.displayName,
       email: usrdata.email,
@@ -112,9 +124,12 @@ export class LoginComponent implements OnInit {
     });
   }
   async addData() {
+    this.ngxService.start();
     await this.auth.addUserDetails(this.addUserForm.value);
-    this.router.navigate(['/Home']);
     this.closeModel();
+    await localStorage.setItem('token', 'true');
+    this.ngxService.stop();
+    this.router.navigate(['/Home']);
   }
 
   async loginWithgoogle() {

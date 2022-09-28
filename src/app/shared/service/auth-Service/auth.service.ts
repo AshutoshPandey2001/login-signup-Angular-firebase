@@ -40,7 +40,7 @@ export class AuthService {
     console.log(
       'CurrentUser$',
       this.currentUser$.subscribe((res) => {
-        console.log('current User Res', res?.uid);
+        // console.log('current User Res', res?.uid);
         this.currrentUserId$ = res?.uid;
       })
     );
@@ -137,7 +137,7 @@ export class AuthService {
         uid: userDetails.uid,
         userType: userDetails.userType,
       };
-      console.log('Some Data', userDetails);
+      // console.log('Some Data', userDetails);
       let user = await this.firestore
         .collection('UsersDetails')
         .doc(userDetails.uid);
@@ -191,21 +191,42 @@ export class AuthService {
       let dataRef = this.firestore.collection('UsersDetails');
       dataRef.get().subscribe((res) => {
         res.forEach((doc) => {
-          console.log('get res ', doc);
+          // console.log('get res ', doc);
           let res: any = doc.data();
-          if (res.uid !== this.currrentUserId$) {
-            userData$.push(res);
-          }
+          userData$.push(res);
 
-          console.log('User$Data', userData$);
+          // console.log('User$Data', userData$);
         });
 
-        console.log('new User$ Data', userData$);
+        // console.log('new User$ Data', userData$);
         resolve(userData$);
         // console.log('get res', res.docs);
       });
     });
   }
+
+  // getUserDetails() {
+  //   return new Promise((resolve) => {
+  //     var userData$: any[] = [];
+
+  //     let dataRef = this.firestore.collection('UsersDetails');
+  //     dataRef.get().subscribe((res) => {
+  //       res.forEach((doc) => {
+  //         console.log('get res ', doc);
+  //         let res: any = doc.data();
+  //         if (res.uid !== this.currrentUserId$) {
+  //           userData$.push(res);
+  //         }
+
+  //         console.log('User$Data', userData$);
+  //       });
+
+  //       console.log('new User$ Data', userData$);
+  //       resolve(userData$);
+  //       // console.log('get res', res.docs);
+  //     });
+  //   });
+  // }
 }
 
 // for (let i = 0; i < this.userData$.length; i++) {

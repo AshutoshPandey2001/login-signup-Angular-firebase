@@ -5,10 +5,14 @@
       <div>
         
       </div>
+      <div class="float-right">
+        <input  class=" search searchinput " type="search" placeholder="Search..." aria-label="Search"
+        [(ngModel)]="searchitem">
+      </div>
       <div class="table-responsive">
-        <input class=" search searchinput" type="search" placeholder="Search..." aria-label="Search"
-            [(ngModel)]="searchitem">
-        <table datatable class="table table-bordered  text-center">
+
+       
+        <table datatable class="table table-bordered  text-center ">
           <thead>
             <tr>
               <th>Name</th>
