@@ -15,6 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import swal from 'sweetalert2';
+// import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-home',

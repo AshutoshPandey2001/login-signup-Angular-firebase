@@ -30,6 +30,19 @@ import {
 } from 'ngx-ui-loader';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgChartsModule } from 'ng2-charts';
+// import { GraphComponent } from './pages/graph/graph.component';
+import { FinancialChartComponent } from './pages/financial-chart/financial-chart.component';
+import { PieChartComponent } from './pages/pie-chart/pie-chart.component';
+
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
+import { BarChartDaily1Component } from './pages/bar-chart-daily1/bar-chart-daily1.component';
+import { BarChartMonthly1Component } from './pages/bar-chart-monthly1/bar-chart-monthly1.component';
+import { BarChartYearly1Component } from './pages/bar-chart-yearly1/bar-chart-yearly1.component';
+import { BubbleChartComponent } from './pages/bubble-chart/bubble-chart.component';
+import { LineChartComponent } from './pages/line-chart/line-chart.component';
+import { RadarChartComponent } from './pages/radar-chart/radar-chart.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +52,24 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     SingupComponent,
     HeaderComponent,
     ContactusComponent,
+    // GraphComponent,
+    FinancialChartComponent,
+    PieChartComponent,
+    BarChartDaily1Component,
+    BarChartMonthly1Component,
+    BarChartYearly1Component,
+    BubbleChartComponent,
+    LineChartComponent,
+    RadarChartComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgChartsModule,
     FormsModule,
+
+    TabsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

@@ -5,7 +5,7 @@ import { AuthService } from '../../shared/service/auth-Service/auth.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import swal from 'sweetalert2';
 
-import { user } from '@angular/fire/auth';
+// import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-singup',
