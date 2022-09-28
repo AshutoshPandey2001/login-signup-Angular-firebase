@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -92,7 +93,7 @@ import { RadarChartComponent } from './pages/radar-chart/radar-chart.component';
     NgxPaginationModule,
     Ng2SearchPipeModule,
   ],
-  providers: [ActivateGuardGuard, AuthService],
+  providers: [ActivateGuardGuard, AuthService, BsModalService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

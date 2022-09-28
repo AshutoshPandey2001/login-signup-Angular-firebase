@@ -9,8 +9,6 @@ import {
   GetUsers,
   UpdateUsers,
 } from '../action/userDetails.action';
-import { tap } from 'rxjs/operators';
-import { user } from '@angular/fire/auth';
 
 // State Model
 export class loginStateModel {

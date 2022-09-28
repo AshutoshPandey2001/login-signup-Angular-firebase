@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/service/auth-Service/auth.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import swal from 'sweetalert2';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,15 @@ import swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  addUserForm: FormGroup;
   userDataList: any = [];
-
+  modelref?: BsModalRef;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
-    private ngxService: NgxUiLoaderService
+    private ngxService: NgxUiLoaderService,
+    private modelService: BsModalService
   ) {
     this.loginForm = this.formBuilder.group({
       email: [
@@ -38,6 +41,22 @@ export class LoginComponent implements OnInit {
         ],
       ],
     });
+    this.addUserForm = this.formBuilder.group({
+      displayName: ['', [Validators.required, Validators.minLength(6)]],
+      addrass: ['', [Validators.required, Validators.minLength(10)]],
+      phoneNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern('^[0-9]{10}$'),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      userType: [''],
+      uid: [''],
+    });
     // this.auth.getUserDetails();
   }
 
@@ -45,8 +64,12 @@ export class LoginComponent implements OnInit {
     // this.clearData();
     // this.auth.getUserDetails().subscribe();
   }
+  closeModel() {
+    this.modelref?.hide();
+    this.cleradduserform();
+  }
 
-  async logIn() {
+  async logIn(template: TemplateRef<any>) {
     // this.toast.success('Login Successfully!');
 
     if (this.loginForm.valid) {
@@ -55,17 +78,21 @@ export class LoginComponent implements OnInit {
           this.loginForm.value.email,
           this.loginForm.value.password
         );
+        console.log(user);
+
+        await this.addUser(user.user);
+        this.modelref = this.modelService.show(template);
 
         if (user) {
-          this.ngxService.start();
-          await this.auth.addUserDetails(user.user);
+          // this.ngxService.start();
+          // await this.auth.addUserDetails(user.user);
 
           console.log('user_data', user.user.uid);
           // localStorage.setItem('uid', user.user.uid);
           await localStorage.setItem('token', 'true');
-          this.ngxService.stop();
+          // this.ngxService.stop();
 
-          this.router.navigate(['/Home']);
+          // this.router.navigate(['/Home']);
           this.clearData();
         }
       } catch (error) {
@@ -75,6 +102,19 @@ export class LoginComponent implements OnInit {
     } else {
       swal.fire('Error!', 'Please Enter Correct Details', 'error');
     }
+  }
+
+  async addUser(usrdata: any) {
+    this.addUserForm.patchValue({
+      displayName: usrdata.displayName,
+      email: usrdata.email,
+      uid: usrdata.uid,
+    });
+  }
+  async addData() {
+    await this.auth.addUserDetails(this.addUserForm.value);
+    this.router.navigate(['/Home']);
+    this.closeModel();
   }
 
   async loginWithgoogle() {
@@ -127,7 +167,14 @@ export class LoginComponent implements OnInit {
   clearData() {
     this.loginForm.reset();
   }
+  cleradduserform() {
+    this.addUserForm.reset();
+  }
+
   get f() {
     return this.loginForm.controls;
+  }
+  get g() {
+    return this.addUserForm.controls;
   }
 }
