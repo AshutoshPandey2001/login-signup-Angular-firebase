@@ -1,84 +1,9 @@
-.body{
-    margin-left: 5rem;
-}
-nav{
-
-    display: flex;    
-    background: rgba(22, 29, 25, 0.907);
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-    text-align: center;
-    align-items: center;
-    justify-content: space-between;
-    // margin-left: 4.5rem;
-    // margin-right: -20px;
-
-}
-
-nav a img{
-    align-items: center;
-   
-    width: 320px;
-    height: auto;
-    text-decoration: none;
-    // padding-left: 50px;
-}
-.nav-liinks{
-    align-items: center;    
-    text-align: right;
-    margin-right: 20px;
-}
 .mobileviewsignout{
     font-size: 0; 
 }
-.signoutLaptoptabview{
-    font-size: 36px;
-    color: #067bb5;
-}
-
-.nav-liinks i::after{    
-    width: 0;
-    height: 2px;
-    background: #f44336;
-    display: block;
-    margin: auto;
-    transition: 0.5s;
-    content: '';
-}
-.nav-liinks i:hover:after{
- width: 100%;
-}
-.nav-liinks ul li button{
-    border-radius: 25px;
-}
-
-
-@media(max-width:430px){
-  
-    .mobileviewsignout{
-        
-        font-size: 24px; 
-        color: white;    
-
-    }
-    .signoutLaptoptabview{
-        font-size: 0px;
-    }
-    
-    
-}
-
-
-
-
-
-
-//side pannel
-
-
 .sidenav{
 
-    background: #067bb5;
+    background: rgba(22, 29, 25, 0.907);
 
     // background: #0aa0eb;
     transition: all .5s ease;
@@ -87,7 +12,7 @@ nav a img{
     top: 0;
     width: 5rem;
     height: 100vh;
-    box-shadow: 0.063rem 0 1.25rem 0 #8990a3;
+    // box-shadow: 0.063rem 0 1.25rem 0 #8990a3;
 
 
     .logo-container{
@@ -190,4 +115,18 @@ nav a img{
             color: #000;
         }
     }
+}
+@media(max-width:430px){
+  
+    .mobileviewsignout{
+        
+        font-size: 24px; 
+        color: white;    
+
+    }
+    // .signoutLaptoptabview{
+    //     font-size: 0px;
+    // }
+    
+    
 }

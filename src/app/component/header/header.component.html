@@ -1,21 +1,25 @@
 <!--Navbar -->
-<nav>
-  <a>
-    <img src="../../../assets/Skyban logo with transparent background.png"
-  /></a>
+<div class="body">
+  <nav >
+    <a>
+      <img src="../../../assets/Skyban logo with transparent background.png"
+    /></a>
+  
+    <div class="nav-liinks">
+      <i
+        class="fa fa-sign-out float-right signoutLaptoptabview"
+        (click)="Logout()"
+      ></i>
+    </div>
+  </nav>
+  
+</div>
 
-  <div class="nav-liinks">
-    <i
-      class="fa fa-sign-out float-right signoutLaptoptabview"
-      (click)="Logout()"
-    ></i>
-  </div>
-</nav>
 <!--/.Navbar -->
 
 <!-- side pannel -->
 
-<div class="sidenav" [ngClass]="collepsed ? 'sidenv-collepsed' : ''">
+<!-- <div class="sidenav" [ngClass]="collepsed ? 'sidenv-collepsed' : ''">
   <div class="logo-container">
     <i
       class="material-icons"
@@ -36,4 +40,4 @@
     </li>
     <li><i class="fa fa-sign-out mobileviewsignout" (click)="Logout()"></i></li>
   </ul>
-</div>
+</div> -->

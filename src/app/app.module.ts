@@ -44,6 +44,7 @@ import { BarChartDaily1Component } from './component/Charts/bar-chart-daily1/bar
 import { BubbleChartComponent } from './component/Charts/bubble-chart/bubble-chart.component';
 import { LineChartComponent } from './component/Charts/line-chart/line-chart.component';
 import { RadarChartComponent } from './component/Charts/radar-chart/radar-chart.component';
+import { MenuComponent } from './component/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { RadarChartComponent } from './component/Charts/radar-chart/radar-chart.
     BubbleChartComponent,
     LineChartComponent,
     RadarChartComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
