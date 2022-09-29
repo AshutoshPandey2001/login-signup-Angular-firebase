@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
@@ -13,6 +13,7 @@ export class BarChartDaily1Component implements OnInit {
 
   ngOnInit(): void {}
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  // @view() barChartmonthdata:string;
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -51,6 +52,27 @@ export class BarChartDaily1Component implements OnInit {
     ],
   };
 
+  // Monthly
+  // @Input() monthlyChart: BaseChartDirective | undefined;
+  // public barChartTypemonthly: ChartType = 'bar';
+  // public barChartPluginsmonthly = [DataLabelsPlugin];
+
+  // public barChartDatamonthly: ChartData<'bar'> = {
+  //   labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
+  //   datasets: [
+  //     { data: [165, 159, 180, 181, 156, 155, 140], label: 'Series A' },
+  //     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
+  //   ],
+  // };
+
+  // public barChartmonthdata: ChartData<'bar'> = {
+  //   labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
+  //   datasets: [
+  //     { data: [110, 120, 180, 131, 116, 155, 140], label: 'Series A' },
+  //     { data: [128, 148, 140, 119, 186, 127, 190], label: 'Series B' },
+  //   ],
+  // };
+
   // events
   public chartClicked({
     event,
@@ -72,6 +94,20 @@ export class BarChartDaily1Component implements OnInit {
     console.log(event, active);
   }
 
+  public randomize(): void {
+    // Only Change 3 values
+    this.barChartData.datasets[0].data = [
+      Math.round(Math.random() * 100),
+      59,
+      80,
+      Math.round(Math.random() * 100),
+      56,
+      Math.round(Math.random() * 100),
+      40,
+    ];
+
+    this.chart?.update();
+  }
   // constructor() {}
 
   // ngOnInit(): void {}
