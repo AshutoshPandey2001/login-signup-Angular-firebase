@@ -1,18 +1,8 @@
-<div class="sidenav" [ngClass]="collepsed ? 'sidenv-collepsed' : ''">
-    <div class="logo-container">
-      <i
-        class="material-icons"
-        style="font: size 24px; color: white"
-        (click)="toggelcollepse()"
-        >menu</i
-      >
-      <button class="btn-close" *ngIf="collepsed">
-        <i class="fal fa-times close-icon" (click)="closesisenav()"></i>
-      </button>
-    </div>
+<div class="sidenav "  (mouseout)="closesisenav()" [ngClass]="collepsed ? 'sidenv-collepsed' : ''">
+   
     <ul class="sidenav-nav">
       <li class="side-nav-item" *ngFor="let item of navBar">
-        <a class="side-nav-link" [routerLink]="item.path">
+        <a class="side-nav-link" [routerLink]="item.path" (mouseover)="toggelcollepse()"  (mouseout)="closesisenav()">
           <i class="side-nav-icon" [class]="item.icon"></i>
           <span class="side-nav-text" *ngIf="collepsed">{{ item.title }}</span>
         </a>
@@ -20,3 +10,4 @@
       <li><i class="fa fa-sign-out mobileviewsignout" (click)="Logout()"></i></li>
     </ul>
   </div>
+ 

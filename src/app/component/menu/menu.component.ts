@@ -61,7 +61,4 @@ export class MenuComponent implements OnInit {
   closesisenav() {
     this.collepsed = false;
   }
-  // @HostListener('document:click') click() {
-  //   this.collepsed = false;
-  // }
 }

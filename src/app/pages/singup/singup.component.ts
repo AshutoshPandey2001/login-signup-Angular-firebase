@@ -23,7 +23,7 @@ export class SingupComponent implements OnInit {
     private ngxservice: NgxUiLoaderService
   ) {
     this.singUpForm = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.minLength(6)]],
+      fullName: ['', [Validators.required, Validators.minLength(4)]],
       addrass: ['', [Validators.required, Validators.minLength(10)]],
       mobileNo: [
         '',

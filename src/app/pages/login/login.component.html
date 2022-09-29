@@ -126,7 +126,7 @@
 <section>
   <ng-template #template>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Modal</h4>
+      <h4 class="modal-title pull-left">Please Fill All Mandatory Details</h4>
       <button
         type="button"
         class="btn-close close pull-right"
@@ -145,47 +145,19 @@
             class="form-control"
             placeholder="Enter Your Name"
             formControlName="displayName"
-          />
-          <!-- [ngClass]="{'is-invalid': g['displayName'].touched && g['displayName'].errors}"
+            [ngClass]="{'is-invalid': g['displayName'].touched && g['displayName'].errors}"/>
+          
           <div *ngIf="g['displayName'].touched && g['displayName'].errors" class="invalid-feedback">
             <div *ngIf="g['displayName'].touched && g['displayName'].errors['required']">
               Full Name Is Required....!
             </div>
             <div *ngIf="g['displayName'].touched && g['displayName'].errors['minlength']">
-              Full Name Must Be Minimum 6 Char....!
+              Full Name Must Be Minimum 4 Char....!
             </div>
               
-          </div> -->
+          </div> 
         </div>
-        <!-- <div class="form-group">
-          <label class="txtcolor">Address.:</label>
-          <input type="text" class="form-control" placeholder="Enter Your Address" formControlName="addrass" [ngClass]="{'is-invalid': g['addrass'].touched && g['addrass'].errors}" >
-          <div *ngIf=" g['addrass'].touched && g['addrass'].errors" class="invalid-feedback">
-            <div *ngIf="g['addrass'].touched && g['addrass'].errors['required']">
-              Address is Required ...!
-            </div>
-            <div *ngIf="g['addrass'].touched && g['addrass'].errors['minlength']">
-              Minimum Address Length 10 is Required ...!
-            </div>
-  
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="txtcolor">Mobile No.:</label>
-          <input type="text" maxlength="10" class="form-control" placeholder="Enter Your Mobile No." formControlName="phoneNumber" [ngClass]="{'is-invalid': f['phoneNumber'].touched && f['phoneNumber'].errors}">
-          <div *ngIf=" g['phoneNumber'].touched && g['phoneNumber'].errors" class="invalid-feedback">
-            <div *ngIf="g['phoneNumber'].touched && g['phoneNumber'].errors['required']">
-              Mobile No. is Required ...!
-            </div>
-            <div *ngIf="g['phoneNumber'].touched && g['phoneNumber'].errors['minlength']">
-              Minimum 10 Digit Mobile No. is Required........!
-            </div>
-            <div *ngIf="g['phoneNumber'].touched && g['phoneNumber'].errors['maxlength']">
-              Mobile No. Must be Only 10 Digit ......!
-            </div>
-  
-          </div>
-        </div> -->
+        
         <div class="form-group">
           <label class="txtcolor">Email address:</label>
           <input
@@ -195,16 +167,7 @@
             formControlName="email"
             readonly
           />
-          <!-- [ngClass]="{'is-invalid': g['email'].touched && g['email'].errors}" readonly 
-            <div *ngIf=" g['email'].touched && g['email'].errors" class="invalid-feedback">
-              <div *ngIf="g['email'].touched && g['email'].errors['required']">
-                Email id is Required ...!
-              </div>
-              <div *ngIf="g['email'].touched && g['email'].errors['email']">
-                Please Write Email in this pattern ex: abc@gmail.com  ...!
-              </div>
-    
-            </div> -->
+         
         </div>
         <div class="form-group">
           <label>Select User Type:</label>
@@ -212,12 +175,19 @@
             class="form-control"
             placeholder="Select status"
             formControlName="userType"
-          >
-            <option>Select Status</option>
+            [ngClass]="{'is-invalid': g['userType'].touched && g['userType'].errors}" >
+            <option [selected]="true" [disabled]="true">Select Status</option>
             <option>User</option>
             <option>Admin</option>
             <option>Super Admin</option>
           </select>
+          <div *ngIf="g['userType'].touched && g['userType'].errors" class="invalid-feedback">
+            <div *ngIf="g['userType'].touched && g['userType'].errors['required']">
+              User Type  Is Required....!
+            </div>
+            
+              
+          </div> 
         </div>
         <div class="form-group">
           <label class="txtcolor">UID:</label>

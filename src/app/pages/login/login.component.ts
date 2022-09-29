@@ -45,19 +45,10 @@ export class LoginComponent implements OnInit {
       ],
     });
     this.addUserForm = this.formBuilder.group({
-      displayName: ['', [Validators.required, Validators.minLength(6)]],
-      addrass: ['', [Validators.required, Validators.minLength(10)]],
-      phoneNumber: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10),
-          Validators.pattern('^[0-9]{10}$'),
-        ],
-      ],
+      displayName: ['', [Validators.required, Validators.minLength(4)]],
+
       email: ['', [Validators.required, Validators.email]],
-      userType: [''],
+      userType: ['', [Validators.required]],
       uid: [''],
     });
     // this.auth.getUserDetails();
@@ -124,12 +115,16 @@ export class LoginComponent implements OnInit {
     });
   }
   async addData() {
-    this.ngxService.start();
-    await this.auth.addUserDetails(this.addUserForm.value);
-    this.closeModel();
-    await localStorage.setItem('token', 'true');
-    this.ngxService.stop();
-    this.router.navigate(['/Home']);
+    if (this.addUserForm.valid) {
+      this.ngxService.start();
+      await this.auth.addUserDetails(this.addUserForm.value);
+      this.closeModel();
+      await localStorage.setItem('token', 'true');
+      this.ngxService.stop();
+      this.router.navigate(['/Home']);
+    } else {
+      swal.fire('Error!', 'Please Enter Correct Details', 'error');
+    }
   }
 
   async loginWithgoogle() {
