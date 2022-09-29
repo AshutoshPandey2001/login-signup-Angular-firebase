@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 // import { async, Observable } from 'rxjs';
-import { AuthService } from '../../shared/service/auth-Service/auth.service';
+import { AuthService } from '../../Services/auth-Service/auth.service';
 import { Select, Store } from '@ngxs/store';
 import {
   AddUser,
   DeleteUsers,
   GetUsers,
   UpdateUsers,
-} from '../store/action/userDetails.action';
-import { LoginState } from '../store/state/userDetails.state';
+} from '../../ngxs store/action/userDetails.action';
+import { LoginState } from '../../ngxs store/state/userDetails.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxUiLoaderService } from 'ngx-ui-loader';

@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+
 @Component({
-  selector: 'app-bar-chart-monthly1',
-  templateUrl: './bar-chart-monthly1.component.html',
-  styleUrls: ['./bar-chart-monthly1.component.scss'],
+  selector: 'app-bar-chart-daily1',
+  templateUrl: './bar-chart-daily1.component.html',
+  styleUrls: ['./bar-chart-daily1.component.scss'],
 })
-export class BarChartMonthly1Component implements OnInit {
+export class BarChartDaily1Component implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
@@ -35,7 +36,15 @@ export class BarChartMonthly1Component implements OnInit {
   public barChartPlugins = [DataLabelsPlugin];
 
   public barChartData: ChartData<'bar'> = {
-    labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
+    labels: [
+      'Monday',
+      'Tuesday',
+      'Wed',
+      'Thrusday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ],
     datasets: [
       { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
       { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
@@ -61,21 +70,6 @@ export class BarChartMonthly1Component implements OnInit {
     active?: {}[];
   }): void {
     console.log(event, active);
-  }
-
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.round(Math.random() * 100),
-      56,
-      Math.round(Math.random() * 100),
-      40,
-    ];
-
-    this.chart?.update();
   }
 
   // constructor() {}

@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { AuthService } from '../../../shared/service/auth-Service/auth.service';
+import { AuthService } from '../../Services/auth-Service/auth.service';
 import {
   AddUser,
   DeleteUsers,
