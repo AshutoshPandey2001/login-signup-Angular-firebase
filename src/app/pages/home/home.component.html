@@ -242,13 +242,289 @@
           >
             Close
           </button>
+          <h1>Welcome to the Skyban Technology Pvt ltd</h1>
+          <div></div>
+          <div class="float-right">
+            <input
+              class="search searchinput"
+              type="search"
+              placeholder="Search..."
+              aria-label="Search"
+              [(ngModel)]="searchitem"
+            />
+          </div>
+          <div class="table-responsive">
+            <table datatable class="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile No.</th>
+                  <th>Address</th>
+                  <th>UID</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let item of userData
+                      | paginate: { itemsPerPage: 3, currentPage: p }
+                      | filter: searchitem
+                  "
+                >
+                  <td>{{ item.displayName }}</td>
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.phoneNumber }}</td>
+                  <td>{{ item.addrass }}</td>
+                  <td>{{ item.uid }}</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn"
+                      data-toggle="modal"
+                      data-target="#myModal"
+                      (click)="editDetails(item.uid, item)"
+                    >
+                      <i
+                        class="material-icons"
+                        style="font-size: 25px; color: rgba(255, 200, 0, 0.949)"
+                        >edit</i
+                      >
+                    </button>
+                    <button
+                      type="button"
+                      class="btn"
+                      (click)="deleteUser(item.uid)"
+                    >
+                      <i
+                        class="material-icons"
+                        style="font-size: 25px; color: red"
+                        >delete</i
+                      >
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls
+              (pageChange)="p = $event"
+              class="float-right"
+            ></pagination-controls>
+          </div>
+
+          <div class="row">
+            <div class="modal" id="myModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Edit Users Details</h4>
+                    <button
+                      type="button"
+                      class="close closecross"
+                      data-dismiss="modal"
+                    >
+                      &times;
+                    </button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    <form [formGroup]="EditUserForm">
+                      <div class="form-group">
+                        <label class="txtcolor">Full Name:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Your Name"
+                          formControlName="displayName"
+                          [ngClass]="{
+                            'is-invalid':
+                              f['displayName'].touched &&
+                              f['displayName'].errors
+                          }"
+                        />
+                        <div
+                          *ngIf="
+                            f['displayName'].touched && f['displayName'].errors
+                          "
+                          class="invalid-feedback"
+                        >
+                          <div
+                            *ngIf="
+                              f['displayName'].touched &&
+                              f['displayName'].errors['required']
+                            "
+                          >
+                            Full Name Is Required....!
+                          </div>
+                          <div
+                            *ngIf="
+                              f['displayName'].touched &&
+                              f['displayName'].errors['minlength']
+                            "
+                          >
+                            Full Name Must Be Minimum 6 Char....!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="txtcolor">Address.:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Your Address"
+                          formControlName="addrass"
+                          [ngClass]="{
+                            'is-invalid':
+                              f['addrass'].touched && f['addrass'].errors
+                          }"
+                        />
+                        <div
+                          *ngIf="f['addrass'].touched && f['addrass'].errors"
+                          class="invalid-feedback"
+                        >
+                          <div
+                            *ngIf="
+                              f['addrass'].touched &&
+                              f['addrass'].errors['required']
+                            "
+                          >
+                            Address is Required ...!
+                          </div>
+                          <div
+                            *ngIf="
+                              f['addrass'].touched &&
+                              f['addrass'].errors['minlength']
+                            "
+                          >
+                            Minimum Address Length 10 is Required ...!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="txtcolor">Mobile No.:</label>
+                        <input
+                          type="text"
+                          maxlength="10"
+                          class="form-control"
+                          placeholder="Enter Your Mobile No."
+                          formControlName="phoneNumber"
+                          [ngClass]="{
+                            'is-invalid':
+                              f['phoneNumber'].touched &&
+                              f['phoneNumber'].errors
+                          }"
+                        />
+                        <div
+                          *ngIf="
+                            f['phoneNumber'].touched && f['phoneNumber'].errors
+                          "
+                          class="invalid-feedback"
+                        >
+                          <div
+                            *ngIf="
+                              f['phoneNumber'].touched &&
+                              f['phoneNumber'].errors['required']
+                            "
+                          >
+                            Mobile No. is Required ...!
+                          </div>
+                          <div
+                            *ngIf="
+                              f['phoneNumber'].touched &&
+                              f['phoneNumber'].errors['minlength']
+                            "
+                          >
+                            Minimum 10 Digit Mobile No. is Required........!
+                          </div>
+                          <div
+                            *ngIf="
+                              f['phoneNumber'].touched &&
+                              f['phoneNumber'].errors['maxlength']
+                            "
+                          >
+                            Mobile No. Must be Only 10 Digit ......!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="txtcolor">Email address:</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          placeholder="Enter email"
+                          formControlName="email"
+                          [ngClass]="{
+                            'is-invalid':
+                              f['email'].touched && f['email'].errors
+                          }"
+                          readonly
+                        />
+                        <div
+                          *ngIf="f['email'].touched && f['email'].errors"
+                          class="invalid-feedback"
+                        >
+                          <div
+                            *ngIf="
+                              f['email'].touched &&
+                              f['email'].errors['required']
+                            "
+                          >
+                            Email id is Required ...!
+                          </div>
+                          <div
+                            *ngIf="
+                              f['email'].touched && f['email'].errors['email']
+                            "
+                          >
+                            Please Write Email in this pattern ex: abc@gmail.com
+                            ...!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="txtcolor">UID:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder=" "
+                          formControlName="uid"
+                          readonly
+                        />
+                      </div>
+                    </form>
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button
+                      class="btn btn-warning"
+                      (click)="updateData()"
+                      data-dismiss="modal"
+                    >
+                      Update
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-dismiss="modal"
+                      (click)="closeForm()"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <div></div>
   </div>
 </div>
-<div></div>
-
 <div class="row">
   <div class="col-lg-6">
     <tabset>
@@ -265,11 +541,14 @@
   </div>
   <div class="col-lg-6"><app-financial-chart></app-financial-chart></div>
 </div>
+<br />
 <div class="row">
-  <div class="col-lg-8 col-md-6 col-12">
+  <div class="col-lg-6 col-md-6 col-12">
     <app-bubble-chart></app-bubble-chart>
   </div>
-  <div class="col-lg-4 col-md-6 col-12"><app-pie-chart></app-pie-chart></div>
+  <div class="col-lg-6 col-md-6 col-12">
+    <app-pie-chart></app-pie-chart>
+  </div>
 </div>
 <div class="row">
   <div class="col-lg-6 col-md-6 col-12">

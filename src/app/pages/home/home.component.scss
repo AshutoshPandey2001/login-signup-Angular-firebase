@@ -10,19 +10,22 @@ tr:hover{
 
 }
 thead{
-    background-color: aqua;
+    background-color:  #067bb5;
 }
 thead tr{
+	color: #fff;
+
     box-shadow: none;
 }
 
 .searchinput{
-    margin-left: 10px;
     width: 300px;
 }
 
 table{
-    margin-left: 10px;
+	border-collapse: collapse;
+
+    margin-left: 70px;
     margin-right: 10px;
 }
 label{
@@ -30,8 +33,8 @@ label{
 }
 
 
-@media only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
+@media only screen and (max-width: 760px)
+  {
 
 	/* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr { 
@@ -49,7 +52,8 @@ label{
 		border: none;
 		border-bottom: 1px solid #eee; 
 		position: relative;
-		padding-left: 50%; 
+		word-wrap: break-word;
+		padding-left:50%; 
 	}
     td:before { 
 		/* Now like a table header */
@@ -69,4 +73,10 @@ label{
     td:nth-of-type(5):before { content: "UID"; }
 	td:nth-of-type(6):before { content: "Action"; }
 	
+}
+
+@media(max-width:430px){
+	.searchinput{
+		width: 200px;
+	}
 }
