@@ -1,8 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth-Service/auth.service';
 import Swal from 'sweetalert2';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NavbarData } from './menu.model';
+import { menudata } from './menu.data';
+import { th } from 'date-fns/locale';
 
 @Component({
   selector: 'app-menu',
@@ -10,19 +13,11 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  navBar = [
-    {
-      title: 'Dashboard',
-      path: '/Home',
-      icon: 'fal fa-home',
-    },
-    {
-      title: 'Contact Us',
-      path: '/contactus',
-      icon: 'fal fa-phone',
-    },
-  ];
+  // @Input() multiple: boolean = false;
+  navBar = menudata;
   collepsed = false;
+  submenu = false;
+  multiple: any;
   constructor(
     private route: Router,
     private auth: AuthService,
@@ -56,9 +51,24 @@ export class MenuComponent implements OnInit {
   }
   ngOnInit(): void {}
   toggelcollepse() {
-    this.collepsed = !this.collepsed;
+    this.collepsed = true;
   }
   closesisenav() {
     this.collepsed = false;
+    this.submenu = false;
+  }
+  showSubmenu() {
+    this.submenu = !this.submenu;
+    // this.collepsed = true;
+  }
+  handleClick(item: NavbarData) {
+    if (!this.multiple) {
+      for (let modelItem of this.navBar) {
+        if (item !== modelItem && modelItem.expanded) {
+          modelItem.expanded = false;
+        }
+      }
+    }
+    item.expanded = !item.expanded;
   }
 }

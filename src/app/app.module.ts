@@ -44,6 +44,10 @@ import { BarChartDaily1Component } from './component/Charts/bar-chart/bar-chart-
 // import { BarChartYearly1Component } from './pages/Charts/bar-chart-yearly1/bar-chart-yearly1.component';
 import { BubbleChartComponent } from './component/Charts/bubble-chart/bubble-chart.component';
 import { MenuComponent } from './component/menu/menu.component';
+import { ReportComponent } from './pages/report/report.component';
+import { DispatchComponent } from './pages/report/dispatch/dispatch.component';
+import { ReceivedComponent } from './pages/report/received/received.component';
+import { TableComponent } from './component/table/table.component';
 // import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
@@ -62,6 +66,10 @@ import { MenuComponent } from './component/menu/menu.component';
     // BarChartYearly1Component,
     BubbleChartComponent,
     MenuComponent,
+    ReportComponent,
+    DispatchComponent,
+    ReceivedComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
