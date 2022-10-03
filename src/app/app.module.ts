@@ -45,6 +45,10 @@ import { BubbleChartComponent } from './component/Charts/bubble-chart/bubble-cha
 import { LineChartComponent } from './component/Charts/line-chart/line-chart.component';
 import { RadarChartComponent } from './component/Charts/radar-chart/radar-chart.component';
 import { MenuComponent } from './component/menu/menu.component';
+import { ReportComponent } from './pages/report/report.component';
+import { DispatchComponent } from './pages/report/dispatch/dispatch.component';
+import { ReceivedComponent } from './pages/report/received/received.component';
+import { TableComponent } from './component/table/table.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +68,10 @@ import { MenuComponent } from './component/menu/menu.component';
     LineChartComponent,
     RadarChartComponent,
     MenuComponent,
+    ReportComponent,
+    DispatchComponent,
+    ReceivedComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
