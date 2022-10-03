@@ -9,7 +9,7 @@ export const menudata: NavbarData[] = [
   {
     title: 'Report',
     path: '*****',
-    icon: 'fal fa-flag',
+    icon: 'fal fa-file',
     childrens: [
       {
         title: 'Dispatch',

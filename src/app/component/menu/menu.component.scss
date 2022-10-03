@@ -7,14 +7,14 @@
     font-size: 0; 
 }
 .sidenav{
-
+    display: flex;
     background: rgba(22, 29, 25, 0.907);
-
     // background: #0aa0eb;
     transition: all .5s ease;
     position: fixed;
     z-index: 1;
-    top: 10vh;   
+    top: 10vh;
+    
     width: 5rem;
     height: 100vh;
     // box-shadow: 0.063rem 0 1.25rem 0 #8990a3;
