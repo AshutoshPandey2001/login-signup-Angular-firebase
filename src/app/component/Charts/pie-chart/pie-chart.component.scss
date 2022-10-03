@@ -1,3 +1,38 @@
 .chart{
     display: block;
 }
+.icon{
+    font-size: 25px;
+    // z-index: 99;
+}
+// canvas{
+//    max-height: 400px;
+//     min-width: 500px;480 767
+// }
+@media only screen and (min-width: 1023px ) {
+    canvas{
+        max-height: 400px;
+         min-width: 500px;
+     }
+  }
+  @media only screen and (min-width: 480px ) and (max-width: 767px ) {
+    canvas{
+        max-height: 200px;
+         min-width: 300px;
+     }
+  }
+  @media only screen and (min-width: 1023px ) and (max-width: 1102px) {
+    canvas{
+        max-height: 300px;
+         min-width: 400px;
+     }
+  }
+
+
+
+
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+

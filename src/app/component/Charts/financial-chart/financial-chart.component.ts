@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import 'chartjs-adapter-date-fns';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart, ChartConfiguration, ChartType } from 'chart.js';
-import { enUS } from 'date-fns/locale';
+import { enUS, th } from 'date-fns/locale';
 import { add, parseISO } from 'date-fns';
 import {
   CandlestickController,
@@ -17,18 +17,57 @@ import {
   styleUrls: ['./financial-chart.component.scss'],
 })
 export class FinancialChartComponent implements OnInit {
+  chartDetail: any;
   barCount = 60;
   initialDateStr = '2017-04-01T00:00:00';
 
-  public financialChartData: ChartConfiguration['data'] = {
+  public financialChartDatadaily: ChartConfiguration['data'] = {
     datasets: [
       {
-        label: 'CHRT - Chart.js Corporation',
+        label: 'CHRT - Financial Detail Daily',
         data: this.getRandomData(this.initialDateStr, this.barCount),
       },
     ],
   };
-
+  public financialChartDataweekly: ChartConfiguration['data'] = {
+    datasets: [
+      {
+        label: 'CHRT - Financial Detail Weekly',
+        data: this.getRandomData(this.initialDateStr, this.barCount),
+      },
+    ],
+  };
+  public financialChartDatamonthly: ChartConfiguration['data'] = {
+    datasets: [
+      {
+        label: 'CHRT - Financial Detail Monthly',
+        data: this.getRandomData(this.initialDateStr, this.barCount),
+      },
+    ],
+  };
+  filter(type: string) {
+    switch (type) {
+      case 'daily':
+        this.chartDetail = {
+          datasets: [
+            {
+              label: 'CHRT - Financial Detail Daily',
+              data: this.getRandomData(this.initialDateStr, this.barCount),
+            },
+          ],
+        };
+        break;
+      case 'weekly':
+        this.chartDetail = this.financialChartDataweekly;
+        break;
+      case 'monthly':
+        this.chartDetail = this.financialChartDatamonthly;
+        break;
+      default:
+        this.chartDetail = this.financialChartDatadaily;
+        break;
+    }
+  }
   public financialChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     animation: false,
@@ -59,7 +98,7 @@ export class FinancialChartComponent implements OnInit {
 
   public financialChartType: ChartType = 'candlestick';
 
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  // @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   constructor() {
     Chart.register(
@@ -68,6 +107,10 @@ export class FinancialChartComponent implements OnInit {
       CandlestickElement,
       OhlcElement
     );
+  }
+
+  ngOnInit(): void {
+    this.filter('daily');
   }
 
   randomNumber(min: number, max: number): number {
@@ -117,8 +160,4 @@ export class FinancialChartComponent implements OnInit {
     this.financialChartType =
       this.financialChartType === 'candlestick' ? 'ohlc' : 'candlestick';
   }
-
-  // constructor() { }
-
-  ngOnInit(): void {}
 }

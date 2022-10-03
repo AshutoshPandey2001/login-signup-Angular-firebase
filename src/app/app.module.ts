@@ -43,8 +43,6 @@ import { BarChartDaily1Component } from './component/Charts/bar-chart/bar-chart-
 // import { BarChartMonthly1Component } from './pages/Charts/bar-chart-monthly1/bar-chart-monthly1.component';
 // import { BarChartYearly1Component } from './pages/Charts/bar-chart-yearly1/bar-chart-yearly1.component';
 import { BubbleChartComponent } from './component/Charts/bubble-chart/bubble-chart.component';
-import { LineChartComponent } from './component/Charts/line-chart/line-chart.component';
-import { RadarChartComponent } from './component/Charts/radar-chart/radar-chart.component';
 import { MenuComponent } from './component/menu/menu.component';
 // import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 
@@ -63,8 +61,6 @@ import { MenuComponent } from './component/menu/menu.component';
     // BarChartMonthly1Component,
     // BarChartYearly1Component,
     BubbleChartComponent,
-    LineChartComponent,
-    RadarChartComponent,
     MenuComponent,
   ],
   imports: [

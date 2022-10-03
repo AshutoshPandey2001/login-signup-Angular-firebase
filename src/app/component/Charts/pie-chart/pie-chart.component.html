@@ -1,14 +1,38 @@
-<div>
-  <div>
+<div class="card">
+  <div class="card-body">
     <div class="chart">
-      <canvas
-        baseChart
-        [data]="pieChartData"
-        [type]="pieChartType"
-        [options]="pieChartOptions"
-        [plugins]="pieChartPlugins"
-      >
-      </canvas>
+      <div class="btn-group" dropdown>
+        <i class="fa fa-filter icon" aria-hidden="true" dropdownToggle></i>
+
+        <ul
+          id="dropdown-animated"
+          *dropdownMenu
+          class="dropdown-menu"
+          role="menu"
+          aria-labelledby="button-animated"
+        >
+          <li role="menuitem">
+            <a class="dropdown-item" (click)="filter('daily')">Daily</a>
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" (click)="filter('weekly')">weekly</a>
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" (click)="filter('monthly')">monthly</a>
+          </li>
+        </ul>
+      </div>
+      <div class="chart">
+        <canvas
+          baseChart
+          [data]="chartDetail"
+          [data]="pieChartDatadaily"
+          [type]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+        >
+        </canvas>
+      </div>
     </div>
   </div>
 </div>

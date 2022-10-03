@@ -10,7 +10,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class PieChartComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-
+  chartDetail: any;
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -28,7 +28,7 @@ export class PieChartComponent implements OnInit {
       },
     },
   };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+  public pieChartDatadaily: ChartData<'pie', number[], string | string[]> = {
     labels: [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'],
     datasets: [
       {
@@ -36,6 +36,49 @@ export class PieChartComponent implements OnInit {
       },
     ],
   };
+  public pieChartDataweekly: ChartData<'pie', number[], string | string[]> = {
+    labels: [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'],
+    datasets: [
+      {
+        data: [300, 500, 100],
+      },
+    ],
+  };
+  public pieChartDatamonthly: ChartData<'pie', number[], string | string[]> = {
+    labels: [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'],
+    datasets: [
+      {
+        data: [300, 500, 100],
+      },
+    ],
+  };
+  filter(type: string) {
+    switch (type) {
+      case 'daily':
+        this.chartDetail = {
+          labels: [
+            ['Download', 'Sales'],
+            ['In', 'Store', 'Sales'],
+            'Mail Sales',
+          ],
+          datasets: [
+            {
+              data: [300, 500, 100],
+            },
+          ],
+        };
+        break;
+      case 'weekly':
+        this.chartDetail = this.pieChartDataweekly;
+        break;
+      case 'monthly':
+        this.chartDetail = this.pieChartDatamonthly;
+        break;
+      default:
+        this.chartDetail = this.pieChartDatadaily;
+        break;
+    }
+  }
   public pieChartType: ChartType = 'pie';
   public pieChartPlugins = [DatalabelsPlugin];
 
@@ -114,27 +157,7 @@ export class PieChartComponent implements OnInit {
       'funny',
     ];
     const randomWord = () => words[Math.trunc(Math.random() * words.length)];
-    this.pieChartData.labels = new Array(3).map((_) => randomWord());
-
-    this.chart?.update();
-  }
-
-  addSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.push(['Line 1', 'Line 2', 'Line 3']);
-    }
-
-    this.pieChartData.datasets[0].data.push(400);
-
-    this.chart?.update();
-  }
-
-  removeSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.pop();
-    }
-
-    this.pieChartData.datasets[0].data.pop();
+    this.chartDetail.labels = new Array(3).map((_) => randomWord());
 
     this.chart?.update();
   }

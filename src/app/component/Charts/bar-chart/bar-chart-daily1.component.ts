@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
@@ -9,14 +9,9 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
   styleUrls: ['./bar-chart-daily1.component.scss'],
 })
 export class BarChartDaily1Component implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-  // @view() barChartmonthdata:string;
+  chartdetail: any;
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: {
       x: {},
       y: {
@@ -36,7 +31,7 @@ export class BarChartDaily1Component implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [DataLabelsPlugin];
 
-  public barChartData: ChartData<'bar'> = {
+  public barChartDatadaily: ChartData<'bar'> = {
     labels: [
       'Monday',
       'Tuesday',
@@ -52,26 +47,66 @@ export class BarChartDaily1Component implements OnInit {
     ],
   };
 
+  // Weekly
+
+  public barChartDataweekly: ChartData<'bar'> = {
+    labels: ['week1', 'week2', 'week3', 'week4'],
+    datasets: [
+      { data: [99, 55, 83, 81, 56, 55, 54], label: 'Series A' },
+      { data: [85, 88, 42, 95, 86, 75, 92], label: 'Series B' },
+    ],
+  };
+
   // Monthly
-  // @Input() monthlyChart: BaseChartDirective | undefined;
-  // public barChartTypemonthly: ChartType = 'bar';
-  // public barChartPluginsmonthly = [DataLabelsPlugin];
 
-  // public barChartDatamonthly: ChartData<'bar'> = {
-  //   labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
-  //   datasets: [
-  //     { data: [165, 159, 180, 181, 156, 155, 140], label: 'Series A' },
-  //     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-  //   ],
-  // };
+  public barChartDatamonthly: ChartData<'bar'> = {
+    labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      { data: [605, 589, 850, 891, 566, 525, 40], label: 'Series A' },
+      { data: [328, 488, 406, 519, 860, 270, 906], label: 'Series B' },
+    ],
+  };
+  constructor() {}
 
-  // public barChartmonthdata: ChartData<'bar'> = {
-  //   labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
-  //   datasets: [
-  //     { data: [110, 120, 180, 131, 116, 155, 140], label: 'Series A' },
-  //     { data: [128, 148, 140, 119, 186, 127, 190], label: 'Series B' },
-  //   ],
-  // };
+  ngOnInit(): void {
+    this.filter('daily');
+  }
+
+  // event
+
+  filter(type: string) {
+    this.chartdetail = null;
+    switch (type) {
+      case 'daily':
+        this.chartdetail = {
+          labels: [
+            'Monday',
+            'Tuesday',
+            'Wed',
+            'Thrusday',
+            'Friday',
+            'Saturday',
+            'Sunday',
+          ],
+          datasets: [
+            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
+          ],
+        };
+        break;
+      case 'weekly':
+        this.chartdetail = this.barChartDataweekly;
+        break;
+      case 'monthly':
+        this.chartdetail = this.barChartDatamonthly;
+        break;
+
+      default:
+        this.chartdetail = this.barChartDatadaily;
+        break;
+    }
+    console.log(this.chartdetail);
+  }
 
   // events
   public chartClicked({
@@ -80,9 +115,7 @@ export class BarChartDaily1Component implements OnInit {
   }: {
     event?: ChartEvent;
     active?: {}[];
-  }): void {
-    console.log(event, active);
-  }
+  }): void {}
 
   public chartHovered({
     event,
@@ -90,25 +123,5 @@ export class BarChartDaily1Component implements OnInit {
   }: {
     event?: ChartEvent;
     active?: {}[];
-  }): void {
-    console.log(event, active);
-  }
-
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.round(Math.random() * 100),
-      56,
-      Math.round(Math.random() * 100),
-      40,
-    ];
-
-    this.chart?.update();
-  }
-  // constructor() {}
-
-  // ngOnInit(): void {}
+  }): void {}
 }
