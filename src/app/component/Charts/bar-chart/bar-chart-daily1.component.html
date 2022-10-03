@@ -1,0 +1,43 @@
+<div>
+  <div class="btn-group" dropdown>
+    <i
+      class="fa-sharp fa-solid fa-filter fa-5x"
+      aria-hidden="true"
+      id="button-animated"
+      dropdownToggle
+      class="dropdown-toggle"
+      aria-controls="dropdown-animated"
+    ></i>
+
+    <ul
+      id="dropdown-animated"
+      *dropdownMenu
+      class="dropdown-menu"
+      role="menu"
+      aria-labelledby="button-animated"
+    >
+      <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+      <li role="menuitem">
+        <a class="dropdown-item" href="#">Another action</a>
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" href="#">Something else here</a>
+      </li>
+    </ul>
+  </div>
+  <div class="chart">
+    <canvas
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [type]="barChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"
+    >
+    </canvas>
+  </div>
+  <!-- <button mat-button mat-raised-button color="primary" (click)="randomize()">
+    Update
+  </button> -->
+</div>

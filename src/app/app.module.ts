@@ -35,10 +35,11 @@ import { NgChartsModule } from 'ng2-charts';
 // import { GraphComponent } from './pages/graph/graph.component';
 import { FinancialChartComponent } from './component/Charts/financial-chart/financial-chart.component';
 import { PieChartComponent } from './component/Charts/pie-chart/pie-chart.component';
-
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { BarChartDaily1Component } from './component/Charts/bar-chart-daily1/bar-chart-daily1.component';
+import { BarChartDaily1Component } from './component/Charts/bar-chart/bar-chart-daily1.component';
 // import { BarChartMonthly1Component } from './pages/Charts/bar-chart-monthly1/bar-chart-monthly1.component';
 // import { BarChartYearly1Component } from './pages/Charts/bar-chart-yearly1/bar-chart-yearly1.component';
 import { BubbleChartComponent } from './component/Charts/bubble-chart/bubble-chart.component';
@@ -49,6 +50,7 @@ import { ReportComponent } from './pages/report/report.component';
 import { DispatchComponent } from './pages/report/dispatch/dispatch.component';
 import { ReceivedComponent } from './pages/report/received/received.component';
 import { TableComponent } from './component/table/table.component';
+// import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -79,8 +81,9 @@ import { TableComponent } from './component/table/table.component';
     ReactiveFormsModule,
     NgChartsModule,
     FormsModule,
-
     TabsModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
