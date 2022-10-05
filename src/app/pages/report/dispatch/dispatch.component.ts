@@ -83,6 +83,10 @@ export class DispatchComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  onAddUser(item: any) {
+    console.log(item);
+  }
+
   editUser(item: any) {
     console.log(item);
   }

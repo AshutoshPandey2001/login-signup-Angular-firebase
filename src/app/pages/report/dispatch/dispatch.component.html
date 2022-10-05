@@ -1,1 +1,9 @@
-<app-table [isAction]="true" [headArray]="headArrayList"[dataList]="jsonData" (onEdit)="editUser($event)" (onDelete)="DeleteUser($event)"></app-table>
+<div class="card"><app-modal></app-modal></div>
+<app-table
+  [isAction]="true"
+  [headArray]="headArrayList"
+  [dataList]="jsonData"
+  (onAdd)="onAddUser($event)"
+  (onEdit)="editUser($event)"
+  (onDelete)="DeleteUser($event)"
+></app-table>

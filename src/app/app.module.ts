@@ -49,6 +49,8 @@ import { DispatchComponent } from './pages/report/dispatch/dispatch.component';
 import { ReceivedComponent } from './pages/report/received/received.component';
 import { TableComponent } from './component/table/table.component';
 // import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalComponent } from './component/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { TableComponent } from './component/table/table.component';
     DispatchComponent,
     ReceivedComponent,
     TableComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ import { TableComponent } from './component/table/table.component';
     ReactiveFormsModule,
     NgChartsModule,
     FormsModule,
+    ModalModule.forRoot(),
     TabsModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),

@@ -1,26 +1,30 @@
-<table  class="table table-bordered table-striped table-hover" datatable >
-    <thead>
-      <tr>
-        <th *ngFor="let head of headArray">{{head.Head}}</th>       
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of dataList">
-            <td *ngFor="let head of headArray"> 
-                <div *ngIf="head.FieldName != ''">
-                    {{item[head.FieldName]}}
-                </div>
-                <div *ngIf="head.FieldName == ''">
-                    <button class="btn btn-warning" (click)="onEditb(item)">Edit</button>
-                    <button class="btn btn-danger" (click)="onDeleteb(item)">Delete</button>
+<table class="table table-bordered table-striped table-hover" datatable>
+  <thead>
+    <tr>
+      <th *ngFor="let head of headArray">{{ head.Head }}</th>
+    </tr>
+  </thead>
 
-                </div>
-</td>
-
-        </tr>
-      <!-- <tr *ngFor="let item of jsonData">
+  <tbody>
+    <tr *ngFor="let item of dataList">
+      <td *ngFor="let head of headArray">
+        <div *ngIf="head.FieldName != ''">
+          {{ item[head.FieldName] }}
+        </div>
+        <div *ngIf="head.FieldName == ''">
+          <button class="btn btn-secondary" (click)="onEditb(item)">
+            Edit
+          </button>
+          <button class="btn btn-danger" (click)="onDeleteb(item)">
+            Delete
+          </button>
+        </div>
+      </td>
+    </tr>
+    <!-- <tr *ngFor="let item of jsonData">
         <td>{{item.playerName}}</td>
         <td>{{item.playerCountry}}</td>
         <td>{{item.playerClub}}</td>
       </tr> -->
-      </tbody>
-      </table>
+  </tbody>
+</table>
