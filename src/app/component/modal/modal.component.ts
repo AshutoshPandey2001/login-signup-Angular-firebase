@@ -16,19 +16,21 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class ModalComponent implements OnInit {
   modalRef?: BsModalRef;
   orderForm: any = FormGroup;
+  oneselectitem: any;
+  isdisable = false;
   // items: any;
   selectIForm: any = FormArray;
   submitted = false;
-  e: any;
+
   optionList: any = [
-    { name: 'Saree' },
-    { name: 'Kurtis' },
-    { name: 'Top' },
-    { name: 'dress' },
-    { name: 'Lehngas' },
-    { name: 'Kurtis Set' },
-    { name: 'Bottoms' },
-    { name: 'One Piease' },
+    { name: 'Saree', disable: false },
+    { name: 'Kurtis', disable: false },
+    { name: 'Top', disable: false },
+    { name: 'dress', disable: false },
+    { name: 'Lehngas', disable: false },
+    { name: 'Kurtis Set', disable: false },
+    { name: 'Bottoms', disable: false },
+    { name: 'One Piease', disable: false },
   ];
   // select = true;
   constructor(
@@ -41,8 +43,37 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  onChange(optionList: any) {
-    console.log('array', optionList.name.value);
+  async onChange(getvalue: any) {
+    console.log('array', typeof getvalue);
+    console.log('console', this.optionList.name);
+    this.oneselectitem = getvalue;
+    // this.selectIForm.splice;
+    console.log(this.optionList);
+    // this.optionList.map(this.optionList.name);
+    // console.log('message', this.optionList.name);
+    // console.log('ertyu', this.oneselectitem);
+    // if (getvalue != '') {
+    //   +"getvalue option[value = '" + getvalue + "']";
+    // }
+    // let filterArray = await this.optionList.filter(
+    //   (item: any) => item.name !== getvalue
+    // );
+    // console.log(filterArray);
+    // this.optionList = filterArray;
+    for (let i = 0; i < this.optionList.length; i++) {
+      if (this.optionList[i].name == getvalue) {
+        this.optionList[i].disable = true;
+        // } else if (this.optionList[i]) {
+        //   this.optionList[i].disable = false;
+        // } else {
+        //   this.optionList[i].disable = false;
+      }
+    }
+
+    // if (this.optionList.name !== getvalue) {
+    //   this.optionList.name;
+    // } else {
+    // }
   }
   createItem(): FormGroup {
     return this.formBuilder.group({

@@ -36,10 +36,13 @@
                 id="sel1"
                 name="sellist1"
                 formControlName="selectItem"
-                (change)="onChange($event)"
+                (change)="onChange(item.get('selectItem').value)"
               >
                 <option [disabled]="true" [selected]="true">select</option>
-                <option *ngFor="let option of optionList">
+                <option
+                  *ngFor="let option of optionList"
+                  [disabled]="option.disable"
+                >
                   {{ option.name }}
                 </option>
               </select>
@@ -53,7 +56,7 @@
               >
             </div>
             <div class="form-group">
-              <label class="txtcolor">No.:</label>
+              <label class="txtcolor">No. Of Images:</label>
               <input
                 type="number"
                 class="form-control"
