@@ -16,3 +16,8 @@ export class DeleteUsers {
   static readonly type = '[UserDetails].delete';
   constructor(public uid: any) {}
 }
+
+// export class GetUserDispatch {
+//   static readonly type = '[get Dispatchdetail]';
+//   constructor(public payload: any) {}
+// }

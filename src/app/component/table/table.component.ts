@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+// import { GetUserDispatch } from '../../ngxs store/action/userDetails.action';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -6,15 +8,18 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class TableComponent implements OnInit {
   @Input() headArray: any[] = [];
-  @Input() dataList: any[] = [];
+  // @Input() dataList: any[] = [{}];
   @Input() isAction: boolean = false;
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDelete = new EventEmitter<any>();
-  @Output() onAdd = new EventEmitter<any>();
+  @Input() getArray: any = [];
+  // jsonData: any = [];
 
   // dtOptions: DataTables.Settings = {};
 
-  constructor() {}
+  constructor(private store: Store) {
+    // this.getUserDetails();
+  }
 
   ngOnInit(): void {
     // this.dtOptions = {
@@ -23,14 +28,18 @@ export class TableComponent implements OnInit {
     //   lengthMenu: [5, 10, 15],
     //   processing: true,
     // };
+    console.log('getarray', this.getArray);
   }
-  onAddtb() {
-    // this.onAdd.emit(item);
+
+  // onAddtb() {
+  // this.onAdd.emit(item);
+  // }
+  // Edit();
+  onEditb(item1: any) {
+    this.onEdit.emit(item1);
   }
-  onEditb(item: any) {
-    this.onEdit.emit(item);
-  }
-  onDeleteb(item: any) {
-    this.onDelete.emit(item);
+  onDeleteb(item1: { orderForm: any }) {
+    this.onDelete.emit(item1);
+    // console.log('uid');
   }
 }

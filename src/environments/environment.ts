@@ -4,14 +4,19 @@
 
 export const environment = {
   production: false,
-  firebase:{
-    apiKey: "AIzaSyCv0GsPPuQHOQHT5f2firbuZq18aD0EmkU",
-    authDomain: "angular-login-signup-practice.firebaseapp.com",
-    projectId: "angular-login-signup-practice",
-    storageBucket: "angular-login-signup-practice.appspot.com",
-    messagingSenderId: "593346022071",
-    appId: "1:593346022071:web:9be0be980c4f4dc4791b32"
-  }
+  firebase: {
+    apiKey: 'AIzaSyCuwkgeeXQMcoec5YtcboqzA_7JNNZfGC0',
+
+    authDomain: 'practicei1.firebaseapp.com',
+
+    projectId: 'practicei1',
+
+    storageBucket: 'practicei1.appspot.com',
+
+    messagingSenderId: '322793144267',
+
+    appId: '1:322793144267:web:263eb69996efd684aa404e',
+  },
 };
 
 /*

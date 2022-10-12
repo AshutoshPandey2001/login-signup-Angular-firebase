@@ -6,6 +6,7 @@ import { AuthService } from '../../Services/auth-Service/auth.service';
 import {
   AddUser,
   DeleteUsers,
+  // GetUserDispatch,
   GetUsers,
   UpdateUsers,
 } from '../action/userDetails.action';
@@ -13,6 +14,7 @@ import {
 // State Model
 export class loginStateModel {
   usersProfile: any;
+  // dispatchdetail: any;
 }
 
 //State
@@ -20,6 +22,7 @@ export class loginStateModel {
   name: 'users',
   defaults: {
     usersProfile: null,
+    // dispatchdetail: null,
   },
 })
 @Injectable()
@@ -103,4 +106,18 @@ export class LoginState {
     });
     console.log('deleted uid', uid);
   }
+
+  // Dispatch Content
+  // @Action(GetUserDispatch)
+  // async getnewdetail(
+  //   { getState, setState }: StateContext<loginStateModel>,
+  //   { payload }: GetUserDispatch
+  // ) {
+  //   console.log('State Action', payload);
+  //   const state = getState();
+  //   setState({
+  //     ...state,
+  //     usersProfile: payload,
+  //   });
+  // }
 }

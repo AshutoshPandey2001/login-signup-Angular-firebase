@@ -1,4 +1,45 @@
-<table class="table table-bordered table-striped table-hover" datatable>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-12">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th *ngFor="let item of headArray">
+            {{ item.Head }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item1 of getArray">
+          <td *ngFor="let head of headArray">
+            {{ item1[head.FieldName] }}
+            <div *ngFor="let item of item1.orderForm">
+              <div *ngIf="head.FieldName != ''">
+                {{ item[head.FieldName] }}
+              </div>
+            </div>
+            <div *ngIf="head.FieldName == ''">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="onEditb(item1.orderForm)"
+              >
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </button>
+              <button
+                class="btn btn-outline-danger"
+                (click)="onDeleteb(item1.orderForm)"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <table class="table table-bordered table-striped table-hover" datatable>
   <thead>
     <tr>
       <th *ngFor="let head of headArray">{{ head.Head }}</th>
@@ -13,18 +54,19 @@
         </div>
         <div *ngIf="head.FieldName == ''">
           <button class="btn btn-secondary" (click)="onEditb(item)">
-            Edit
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </button>
           <button class="btn btn-danger" (click)="onDeleteb(item)">
-            Delete
+            <i class="fa fa-trash" aria-hidden="true"></i>
           </button>
         </div>
       </td>
-    </tr>
-    <!-- <tr *ngFor="let item of jsonData">
+    </tr> -->
+<!-- <tr *ngFor="let item of jsonData">
         <td>{{item.playerName}}</td>
         <td>{{item.playerCountry}}</td>
         <td>{{item.playerClub}}</td>
       </tr> -->
-  </tbody>
-</table>
+
+<!-- </tbody> -->
+<!-- </table> -->

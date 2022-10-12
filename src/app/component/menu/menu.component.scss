@@ -13,11 +13,13 @@
     transition: all .5s ease;
     position: fixed;
     z-index: 1;
-    top: 9%;
+    top: 0vh;
     
     width: 5rem;
     height: 100vh;
     // box-shadow: 0.063rem 0 1.25rem 0 #8990a3;
+    transform: translateY(10.5vh);
+}
 
 
     .logo-container{
@@ -69,7 +71,16 @@
         }
 
     }
-}
+    @media (max-width:990px) and (min-width:768px) {
+        .sidenav{
+           transform: translateY(8.5vh);
+        }   
+       }
+       @media (max-width:768px) and (min-width:320px) {
+        .sidenav{
+           transform: translateY(8.5vh);
+        }   
+       }
 
 .sidenv-collepsed{
     width: 15rem;

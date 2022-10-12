@@ -1,42 +1,61 @@
-<div class="sidenav "   (mouseleave)="closesisenav()" [ngClass]="collepsed ? 'sidenv-collepsed' : ''">
-   
-    <ul class="sidenav-nav" >
-      <li class="side-nav-item"  *ngFor="let item of navBar">
-        <a class="side-nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (mouseover)="toggelcollepse()">
-          <i class="side-nav-icon" [class]="item.icon"></i>
-          <span class="side-nav-text" *ngIf="collepsed">{{ item.title }}</span>
-          <i *ngIf="item.childrens && collepsed"
-                class="menu-collapse-icon"
-                [ngClass]="submenu == true? ' fal fa-angle-down' : 'fal fa-angle-right'
-                "
-                (click)="showSubmenu()" ></i>   
-            </a>
-            <ul  *ngIf="collepsed && item.childrens && item.childrens.length > 0 && submenu"
-         
-              class="submenu-nav">
-              <li class="submenu-nav-items" *ngFor="let item of item.childrens">
-                <a class="submenu-link" [routerLink]="item.path" (mouseover)="toggelcollepse()"  (mousewheel)="closesisenav()">
-                  <i class="submenu-link-icon " [class]="item.icon"></i>
-                  <span class="submenu-link-text" *ngIf="collepsed">{{ item.title }}</span> 
-                  <!-- <i
-                        *ngIf="item.childrens && collepsed"
-                        class="menu-collapse-icon"
-                        [ngClass]="
-                          submenu == true? ' fal fa-angle-down' : 'fal fa-angle-right'
-                        "
-                     (click)="showSubmenu()" ></i>    -->
-                    </a>              
-                  </li>
-            </ul>            
-          </li> 
-      <li><i class="fa fa-sign-out mobileviewsignout" (click)="Logout()"></i></li>
-    </ul>
+<div
+  class="sidenav"
+  (mouseleave)="closesisenav()"
+  [ngClass]="collepsed ? 'sidenv-collepsed' : ''"
+>
+  <ul class="sidenav-nav">
+    <li class="side-nav-item" *ngFor="let item of navBar">
+      <a
+        class="side-nav-link"
+        [routerLink]="item.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (mouseover)="toggelcollepse()"
+      >
+        <i class="side-nav-icon" [class]="item.icon"></i>
+        <span class="side-nav-text" *ngIf="collepsed">{{ item.title }}</span>
+        <i
+          *ngIf="item.childrens && collepsed"
+          class="menu-collapse-icon"
+          [ngClass]="
+            submenu == true ? ' fal fa-angle-down' : 'fal fa-angle-right'
+          "
+          (click)="showSubmenu()"
+        ></i>
+      </a>
+      <ul
+        *ngIf="
+          collepsed && item.childrens && item.childrens.length > 0 && submenu
+        "
+        class="submenu-nav"
+      >
+        <li class="submenu-nav-items" *ngFor="let item of item.childrens">
+          <a
+            class="submenu-link"
+            [routerLink]="item.path"
+            (mouseover)="toggelcollepse()"
+            (mousewheel)="closesisenav()"
+          >
+            <i class="submenu-link-icon" [class]="item.icon"></i>
+            <span class="submenu-link-text" *ngIf="collepsed">{{
+              item.title
+            }}</span>
+            <!-- <i
+                    *ngIf="item.childrens && collepsed"
+                    class="menu-collapse-icon"
+                    [ngClass]="
+                      submenu == true? ' fal fa-angle-down' : 'fal fa-angle-right'
+                    "
+                  (click)="showSubmenu()" ></i>    -->
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li><i class="fa fa-sign-out mobileviewsignout" (click)="Logout()"></i></li>
+  </ul>
+</div>
 
-    
-  </div>
- 
-
-  <!-- <ul *ngIf="collepsed && item.childrens && item.childrens.length > 0 && submenu"
+<!-- <ul *ngIf="collepsed && item.childrens && item.childrens.length > 0 && submenu"
          
     class="submenu-nav"
   >
