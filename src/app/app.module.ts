@@ -106,6 +106,7 @@ import { ModalComponent } from './component/modal/modal.component';
     NgxPaginationModule,
     Ng2SearchPipeModule,
   ],
+  entryComponents: [ModalComponent],
   providers: [ActivateGuardGuard, AuthService, BsModalService],
   bootstrap: [AppComponent],
 })

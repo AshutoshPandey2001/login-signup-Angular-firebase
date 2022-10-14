@@ -31,6 +31,8 @@ export class ModalComponent implements OnInit {
   pipe = new DatePipe('en-IN');
   @Output() onModal = new EventEmitter<any>();
   @Input() id: any;
+  // @Output()  [orderForm]  = new EventEmitter <any>();
+
   // @Input() optionList: any[] = [];
 
   // @Output()  = new EventEmitter<any>();
@@ -62,7 +64,7 @@ export class ModalComponent implements OnInit {
     public modal: BsModalRef
   ) {}
   ngOnInit() {
-    console.log(this.id);
+    // console.log(this.id);
     this.openModal(this.id);
     this.orderForm = new FormGroup({
       selectIForm: new FormArray([this.createItem()]),
@@ -133,6 +135,7 @@ export class ModalComponent implements OnInit {
     return this.formBuilder.group({
       selectItem: ['', [Validators.required]],
       number: ['', [Validators.required]],
+      uid: [''],
       // date: new Date(),
     });
   }
@@ -160,50 +163,9 @@ export class ModalComponent implements OnInit {
     remove.removeAt(i);
   }
 
-  async submitb() {
-    if (this.orderForm.valid) {
-      try {
-        let data = {
-          // orderForm: this.orderForm.controls.selectIForm.value,
-          selectIForm: this.orderForm.controls.selectIForm,
-        };
-        let user = await this.firestore
-          .collection('Dispatchdata')
-          .doc(this.orderForm.any);
-        let res = await user.set({
-          orderForm: this.orderForm.value
-            ? this.orderForm.controls.selectIForm.value
-            : '',
-          date: this.pipe.transform(new Date(), 'short'),
-          // date: this.date ? this.orderForm.controls.value : '',
-        });
-        // console.log(this.orderForm);
-        // this.getUserDetails();
-        // console.log(data);
-        // this.modal.hide();
-      } catch (error: any) {
-        Swal.fire('Error!', error.message, 'error');
-        // this.orderForm.selectIForm.selectItem;
-      }
-    } else {
-      console.error('errrrrrrrrrrooooooooor');
-      // Swal.fire('Error!', error.message, 'error');
-    }
-
-    this.clearData();
-  }
-
   openModal(template: TemplateRef<any>) {
-    console.log(template);
-    // this.onModal.emit(template);
+    console.log('dyufu', template);
     this.modalRef = this.modalService.show(template);
-    // console.log(this.orderForm.get('selectIForm').controls);
-    // this.optionList.sort((a:) => a.price);
-    // console.log(a);
-    // this.optionList.sort((a: any) => {
-    //   a.price;
-    //   console.log(a.price);
-    // });
   }
 
   //   addItem() {}

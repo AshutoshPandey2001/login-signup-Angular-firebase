@@ -1,15 +1,178 @@
-<button
-  type="button"
-  class="btn btn-primary float-right"
-  (click)="isModalPresent('template')"
->
-  Add
-</button>
-<app-modal *ngIf="id" [id]="id"></app-modal>
-<app-table
-  [isAction]="true"
-  [headArray]="headArrayList"
-  [getArray]="jsonData"
-  (onEdit)="editUser($event)"
-  (onDelete)="DeleteUser($event)"
-></app-table>
+<!-- <div class="card">
+  <div class="col-lg-12">
+    <button
+      type="button"
+      class="btn btn-primary float-right mt-2"
+      (click)="isModalPresent('template')"
+    >
+      Add
+    </button>
+  </div>
+</div> -->
+<!-- <app-modal *ngIf="id" [id]="id"></app-modal> -->
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-6">
+      <div class="w-50 mt-2">
+        <!-- <input type="search" class="form-control" /> -->
+      </div>
+    </div>
+    <div class="col-6">
+      <button
+        type="button"
+        class="btn btn-outline-primary float-right mt-2"
+        (click)="openModal(template)"
+      >
+        Add
+      </button>
+
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Modal</h4>
+          <button
+            type="button"
+            class="btn-close close pull-right"
+            aria-label="Close"
+            (click)="closemodal()"
+          >
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="orderForm">
+            <div
+              formArrayName="selectIForm"
+              *ngFor="
+                let item of orderForm.get('selectIForm').controls;
+                let i = index
+              "
+            >
+              <div [formGroupName]="i">
+                <!-- <div class="form-group">
+              {{ date | date: "shortDate" }}
+            </div> -->
+                <div class="form-group">
+                  <label>Select Item:</label>
+                  <select
+                    class="form-select form-control"
+                    formControlName="selectItem"
+                    (change)="onChange(item.get('selectItem').value)"
+                  >
+                    <!-- <option [disabled]="true" [selected]="true">select</option> -->
+                    <option
+                      *ngFor="let option of optionList"
+                      [disabled]="option.disable"
+                      [value]="option.name"
+                    >
+                      {{ option.name }}
+                    </option>
+                  </select>
+                  <span
+                    class="text text-danger"
+                    *ngIf="
+                      item.get('selectItem').errors?.required &&
+                      item.get('selectItem').touched
+                    "
+                    >selectItem is required</span
+                  >
+                </div>
+                <div class="form-group">
+                  <label class="txtcolor">No. Of Images:</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Enter Quantity."
+                    formControlName="number"
+                  />
+                  <span
+                    class="text text-danger"
+                    *ngIf="
+                      item.get('number').errors?.required &&
+                      item.get('number').touched
+                    "
+                    >Quantity is required</span
+                  >
+                </div>
+              </div>
+
+              <!-- </button> -->
+
+              <button
+                type="button"
+                class="btn btn-outline-danger rbtn float-right"
+                (click)="removeForm(i)"
+              >
+                Remove
+              </button>
+            </div>
+          </form>
+          <i
+            type="buttton"
+            class="fa fa-plus text text-success icon"
+            aria-hidden="true"
+            (click)="addForm()"
+          ></i>
+          <button
+            type="button"
+            class="btn btn-outline-success ml-3 btns"
+            (click)="submitb()"
+            *ngIf="issubmitvisible == true"
+          >
+            Submit
+          </button>
+          <button
+            class="btn btn-outline-warning"
+            (click)="update()"
+            *ngIf="issubmitvisible == false"
+          >
+            Update
+          </button>
+          <!-- <button class="btn btn-light" type="button"> -->
+        </div>
+      </ng-template>
+      <!-- </div>
+  </div> -->
+    </div>
+    <!-- <app-table
+      [isAction]="true"
+      [headArray]="headArrayList"
+      [getArray]="jsonData"
+      (onEdit)="editUser($event)"
+      (onDelete)="DeleteUser($event)"
+    ></app-table> -->
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th *ngFor="let item of headArrayList">
+          {{ item.Head }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item1 of jsonData; let i = index">
+        <td *ngFor="let head of headArrayList">
+          {{ item1[head.FieldName] }}
+          <div *ngFor="let item of item1.orderForm">
+            <div *ngIf="head.FieldName != ''">
+              {{ item[head.FieldName] }}
+            </div>
+          </div>
+          <div *ngIf="head.FieldName == ''">
+            <button
+              class="btn btn-outline-secondary mr-2"
+              type="button"
+              (click)="onEditb(item1, template, i)"
+            >
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-outline-danger" (click)="onDeleteb(item1)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

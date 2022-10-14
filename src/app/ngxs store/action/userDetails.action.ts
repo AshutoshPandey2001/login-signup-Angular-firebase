@@ -21,3 +21,11 @@ export class DeleteUsers {
 //   static readonly type = '[get Dispatchdetail]';
 //   constructor(public payload: any) {}
 // }
+
+// ----------------Dispatch-------
+// export class addDispatchdata {
+//   static readonly type = 'Add detail';
+//   constructor(public payload: any) {
+//     // console.log('user', payload);
+//   }
+// }

@@ -1,1 +1,146 @@
-<p>received works!</p>
+<div class="container-fluid align-items-center">
+  <div class="row clr">
+    <div class="col-6">
+      <div class="w-50 mt-2">
+        <!-- <input type="search" class="form-control" /> -->
+      </div>
+    </div>
+    <div class="col-6">
+      <button
+        type="button"
+        class="btn btn-primary float-right"
+        (click)="openModal(template)"
+      >
+        Add
+      </button>
+
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Modal</h4>
+          <button
+            type="button"
+            class="btn-close close pull-right"
+            aria-label="Close"
+            (click)="closemodal()"
+          >
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label>Field2:</label>
+              <input type="text" class="form-control" placeholder="Field1" />
+            </div>
+            <div class="form-group">
+              <label>Field2:</label>
+              <input type="text" class="form-control" placeholder="Field2" />
+            </div>
+          </form>
+        </div>
+        <!-- <div class="modal-body">
+          <form [formGroup]="orderForm">
+            <div
+              formArrayName="selectIForm"
+              *ngFor="
+                let item of orderForm.get('selectIForm').controls;
+                let i = index
+              "
+            >
+              <div [formGroupName]="i">
+                <div class="form-group">
+                  <label>Select Item:</label>
+                  <select
+                    class="form-select form-control"
+                    formControlName="selectItem"
+                    (change)="onChange(item.get('selectItem').value)"
+                  >
+                    <option
+                      *ngFor="let option of optionList"
+                      [disabled]="option.disable"
+                      [value]="option.name"
+                    >
+                      {{ option.name }}
+                    </option>
+                  </select>
+                  <span
+                    class="text text-danger"
+                    *ngIf="
+                      item.get('selectItem').errors?.required &&
+                      item.get('selectItem').touched
+                    "
+                    >selectItem is required</span
+                  >
+                </div>
+                <div class="form-group">
+                  <label class="txtcolor">No. Of Images:</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Enter Quantity."
+                    formControlName="number"
+                  />
+                  <span
+                    class="text text-danger"
+                    *ngIf="
+                      item.get('number').errors?.required &&
+                      item.get('number').touched
+                    "
+                    >Quantity is required</span
+                  >
+                </div>
+              </div>
+
+
+              <button
+                type="button"
+                class="btn btn-danger rbtn float-right"
+                (click)="removeForm(i)"
+              >
+                Remove
+              </button>
+            </div>
+          </form>
+          <i
+            type="buttton"
+            class="fa fa-plus text text-success icon"
+            aria-hidden="true"
+            (click)="addForm()"
+          ></i>
+          <button
+            type="button"
+            class="btn btn-outline-success btns"
+            (click)="submitb()"
+          >
+            Submit
+          </button>
+          <button class="btn btn-outline-warning" (click)="update()">
+            Update
+          </button>
+        </div> -->
+      </ng-template>
+      <!-- </div>
+  </div> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered responsive">
+        <thead>
+          <th>field1</th>
+          <th>field2</th>
+          <th>field3</th>
+          <th>field4</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

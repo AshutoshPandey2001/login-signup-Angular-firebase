@@ -38,7 +38,7 @@ export class TableComponent implements OnInit {
   onEditb(item1: any) {
     this.onEdit.emit(item1);
   }
-  onDeleteb(item1: { orderForm: any }) {
+  onDeleteb(item1: any) {
     this.onDelete.emit(item1);
     // console.log('uid');
   }

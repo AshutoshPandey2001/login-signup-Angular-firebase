@@ -14,14 +14,17 @@ import {
 // State Model
 export class loginStateModel {
   usersProfile: any;
+  dispatcharray: any;
   // dispatchdetail: any;
 }
 
 //State
 @State<loginStateModel>({
   name: 'users',
+  // name1:'detail',
   defaults: {
     usersProfile: null,
+    dispatcharray: null,
     // dispatchdetail: null,
   },
 })
@@ -35,8 +38,12 @@ export class LoginState {
   constructor(private authService: AuthService) {}
   @Selector()
   static getUserList(state: loginStateModel) {
-    return state.usersProfile;
+    return [state.usersProfile, state.dispatcharray];
   }
+  // @Selector()
+  // static getDispatchList(state: loginStateModel) {
+  //   return
+  // }
 
   // @Action(GetUsers)
   // async getUserss({ getState, setState }: StateContext<loginStateModel>) {
@@ -55,7 +62,7 @@ export class LoginState {
     { getState, setState }: StateContext<loginStateModel>,
     { payload }: AddUser
   ) {
-    console.log('State Action', payload);
+    // console.log('State Action', payload);
     const state = getState();
     setState({
       ...state,
@@ -118,6 +125,20 @@ export class LoginState {
   //   setState({
   //     ...state,
   //     usersProfile: payload,
+  //   });
+  // }
+
+  // ------------------DispatchState-----------
+  // @Action(addDispatchdata)
+  // async adddetail(
+  //   { getState, setState }: StateContext<loginStateModel>,
+  //   { payload }: addDispatchdata
+  // ) {
+  //   // console.log('State Action new', payload);
+  //   const state = getState();
+  //   setState({
+  //     ...state,
+  //     dispatcharray: payload,
   //   });
   // }
 }
