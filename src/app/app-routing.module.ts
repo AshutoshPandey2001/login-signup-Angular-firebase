@@ -8,6 +8,7 @@ import { SingupComponent } from './pages/singup/singup.component';
 import { ReportComponent } from './pages/report/report.component';
 import { DispatchComponent } from './pages/report/dispatch/dispatch.component';
 import { ReceivedComponent } from './pages/report/received/received.component';
+import { StockComponent } from './pages/report/stock/stock.component';
 
 const routes: Routes = [
   { path: 'Login', component: LoginComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     children: [
       { path: 'dispatch', component: DispatchComponent },
       { path: 'received', component: ReceivedComponent },
+      { path: 'stock', component: StockComponent },
     ],
   },
   { path: '', redirectTo: '/Home', pathMatch: 'full' },

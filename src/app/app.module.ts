@@ -21,7 +21,10 @@ import { NgxsModule } from '@ngxs/store';
 import { AuthService } from './Services/auth-Service/auth.service';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { LoginState } from './ngxs store/state/userDetails.state';
+import {
+  DispatchState,
+  LoginState,
+} from './ngxs store/state/userDetails.state';
 import {
   NgxUiLoaderModule,
   NgxUiLoaderConfig,
@@ -51,6 +54,7 @@ import { TableComponent } from './component/table/table.component';
 // import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './component/modal/modal.component';
+import { StockComponent } from './pages/report/stock/stock.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +77,7 @@ import { ModalComponent } from './component/modal/modal.component';
     ReceivedComponent,
     TableComponent,
     ModalComponent,
+    StockComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +96,7 @@ import { ModalComponent } from './component/modal/modal.component';
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    NgxsModule.forRoot([LoginState]),
+    NgxsModule.forRoot([LoginState, DispatchState]),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxUiLoaderModule.forRoot({

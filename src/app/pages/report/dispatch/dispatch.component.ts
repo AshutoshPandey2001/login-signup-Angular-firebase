@@ -15,7 +15,9 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import Swal from 'sweetalert2';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
+import { addDispatchdata } from 'src/app/ngxs store/action/userDetails.action';
+import { DispatchState } from 'src/app/ngxs store/state/userDetails.state';
 // import { addDispatchdata } from 'src/app/ngxs store/action/userDetails.action';
 
 @Component({
@@ -52,7 +54,7 @@ export class DispatchComponent implements OnInit {
   pipe = new DatePipe('en-IN');
   // oderForm: any;
   uid: any;
-
+  @Select(DispatchState.getList) getjsonData$: any;
   // {
   //   playerName: 'Cristiano Ronaldo',
   //   playerCountry: 'Pourtgal',
@@ -132,6 +134,14 @@ export class DispatchComponent implements OnInit {
     this.orderForm = new FormGroup({
       selectIForm: new FormArray([this.createItem()]),
     });
+    this.getjsonData$.subscribe((res: any) => {
+      console.log('state,slice', res);
+      // this.jsonData = res;
+    });
+    // this.jsonData.subscribe((res: any) => {
+    //   this.jsonData = res;
+    //   console.log('.....', this.jsonData);
+    // });
   }
   onChange(getvalue: any) {
     this.oneselectitem = getvalue;
@@ -232,7 +242,7 @@ export class DispatchComponent implements OnInit {
 
         resolve(this.jsonData);
         // console.log('res', this.jsonData);
-        // this.store.dispatch(new addDispatchdata(this.jsonData));
+        this.store.dispatch(new addDispatchdata(this.jsonData));
       });
     });
   }

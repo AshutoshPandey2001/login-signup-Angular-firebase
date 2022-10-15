@@ -8,7 +8,7 @@ export const menudata: NavbarData[] = [
   },
   {
     title: 'Report',
-    path: '*****',
+    path: '/report/dispatch',
     icon: 'fal fa-file',
     childrens: [
       {
@@ -19,6 +19,11 @@ export const menudata: NavbarData[] = [
       {
         title: 'Recived',
         path: '/report/received',
+        icon: 'fal fa-tags',
+      },
+      {
+        title: 'Stock',
+        path: '/report/stock',
         icon: 'fal fa-tags',
       },
     ],

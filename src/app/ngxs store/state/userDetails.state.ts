@@ -4,6 +4,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { AuthService } from '../../Services/auth-Service/auth.service';
 import {
+  addDispatchdata,
   AddUser,
   DeleteUsers,
   // GetUserDispatch,
@@ -14,7 +15,7 @@ import {
 // State Model
 export class loginStateModel {
   usersProfile: any;
-  dispatcharray: any;
+  // dispatcharray: any;
   // dispatchdetail: any;
 }
 
@@ -24,7 +25,6 @@ export class loginStateModel {
   // name1:'detail',
   defaults: {
     usersProfile: null,
-    dispatcharray: null,
     // dispatchdetail: null,
   },
 })
@@ -38,7 +38,7 @@ export class LoginState {
   constructor(private authService: AuthService) {}
   @Selector()
   static getUserList(state: loginStateModel) {
-    return [state.usersProfile, state.dispatcharray];
+    return [state.usersProfile];
   }
   // @Selector()
   // static getDispatchList(state: loginStateModel) {
@@ -141,4 +141,39 @@ export class LoginState {
   //     dispatcharray: payload,
   //   });
   // }
+}
+// -------------------
+
+export class DispatchStateModel {
+  dispatcharray: any;
+}
+
+@State<DispatchStateModel>({
+  name: 'Dispatchlist',
+  defaults: {
+    dispatcharray: null,
+  },
+})
+@Injectable()
+export class DispatchState {
+  // DispatchStateModel: any;
+  constructor() {}
+  @Selector()
+  static getList(state: DispatchStateModel) {
+    return [state.dispatcharray];
+  }
+
+  @Action(addDispatchdata)
+  async adddetail(
+    { getState, setState }: StateContext<DispatchStateModel>,
+    { payload }: addDispatchdata
+  ) {
+    // console.log('state', payload);
+    // console.log('State Action new', payload);
+    const state = getState();
+    setState({
+      ...state,
+      dispatcharray: payload,
+    });
+  }
 }
